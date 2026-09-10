@@ -1,0 +1,314 @@
+public abstract interface class io/github/mkhytarmkhoian/herald/AnalyticsErrorReporter {
+	public static final field Companion Lio/github/mkhytarmkhoian/herald/AnalyticsErrorReporter$Companion;
+	public abstract fun onFailure (Ljava/lang/String;Lio/github/mkhytarmkhoian/herald/AnalyticsOperation;Ljava/lang/Throwable;)V
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsErrorReporter$Companion {
+	public final fun getNONE ()Lio/github/mkhytarmkhoian/herald/AnalyticsErrorReporter;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService {
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun start (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService$DefaultImpls {
+	public static fun flush (Lio/github/mkhytarmkhoian/herald/AnalyticsLifecycleService;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/AnalyticsOperation {
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsOperation$Flush : io/github/mkhytarmkhoian/herald/AnalyticsOperation {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$Flush;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsOperation$Identify : io/github/mkhytarmkhoian/herald/AnalyticsOperation {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$Identify;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsOperation$Reset : io/github/mkhytarmkhoian/herald/AnalyticsOperation {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$Reset;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsOperation$SetEnabled : io/github/mkhytarmkhoian/herald/AnalyticsOperation {
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$SetEnabled;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$SetEnabled;ZILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$SetEnabled;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEnabled ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsOperation$SetProperty : io/github/mkhytarmkhoian/herald/AnalyticsOperation {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$SetProperty;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$SetProperty;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$SetProperty;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPropertyName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsOperation$Start : io/github/mkhytarmkhoian/herald/AnalyticsOperation {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$Start;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsOperation$Track : io/github/mkhytarmkhoian/herald/AnalyticsOperation {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$Track;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$Track;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/AnalyticsOperation$Track;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEventName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/AnalyticsValue {
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsValue$Boolean : io/github/mkhytarmkhoian/herald/AnalyticsValue {
+	public static final synthetic fun box-impl (Z)Lio/github/mkhytarmkhoian/herald/AnalyticsValue$Boolean;
+	public static fun constructor-impl (Z)Z
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (ZLjava/lang/Object;)Z
+	public static final fun equals-impl0 (ZZ)Z
+	public final fun getValue ()Z
+	public fun hashCode ()I
+	public static fun hashCode-impl (Z)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Z)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Z
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsValue$Double : io/github/mkhytarmkhoian/herald/AnalyticsValue {
+	public static final synthetic fun box-impl (D)Lio/github/mkhytarmkhoian/herald/AnalyticsValue$Double;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public final fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsValue$Float : io/github/mkhytarmkhoian/herald/AnalyticsValue {
+	public static final synthetic fun box-impl (F)Lio/github/mkhytarmkhoian/herald/AnalyticsValue$Float;
+	public static fun constructor-impl (F)F
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (FLjava/lang/Object;)Z
+	public static final fun equals-impl0 (FF)Z
+	public final fun getValue ()F
+	public fun hashCode ()I
+	public static fun hashCode-impl (F)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (F)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()F
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsValue$Int : io/github/mkhytarmkhoian/herald/AnalyticsValue {
+	public static final synthetic fun box-impl (I)Lio/github/mkhytarmkhoian/herald/AnalyticsValue$Int;
+	public static fun constructor-impl (I)I
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (ILjava/lang/Object;)Z
+	public static final fun equals-impl0 (II)Z
+	public final fun getValue ()I
+	public fun hashCode ()I
+	public static fun hashCode-impl (I)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (I)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()I
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsValue$Long : io/github/mkhytarmkhoian/herald/AnalyticsValue {
+	public static final synthetic fun box-impl (J)Lio/github/mkhytarmkhoian/herald/AnalyticsValue$Long;
+	public static fun constructor-impl (J)J
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (JLjava/lang/Object;)Z
+	public static final fun equals-impl0 (JJ)Z
+	public final fun getValue ()J
+	public fun hashCode ()I
+	public static fun hashCode-impl (J)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (J)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()J
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsValue$String : io/github/mkhytarmkhoian/herald/AnalyticsValue {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/mkhytarmkhoian/herald/AnalyticsValue$String;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/AnalyticsValueKt {
+	public static final fun getAsString (Lio/github/mkhytarmkhoian/herald/AnalyticsValue;)Ljava/lang/String;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/ConsentService {
+	public abstract fun setEnabled (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/Event {
+	public abstract fun getName ()Ljava/lang/String;
+	public fun getParameters ()Ljava/util/Map;
+}
+
+public final class io/github/mkhytarmkhoian/herald/Event$DefaultImpls {
+	public static fun getParameters (Lio/github/mkhytarmkhoian/herald/Event;)Ljava/util/Map;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/EventTrackerService {
+	public abstract fun track (Lio/github/mkhytarmkhoian/herald/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/Herald : io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService, io/github/mkhytarmkhoian/herald/ConsentService, io/github/mkhytarmkhoian/herald/EventTrackerService, io/github/mkhytarmkhoian/herald/IdentifiableUserService, io/github/mkhytarmkhoian/herald/PropertyTrackerService {
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun identify (Lio/github/mkhytarmkhoian/herald/Identity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun set (Lio/github/mkhytarmkhoian/herald/Property;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun setEnabled (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun start (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun track (Lio/github/mkhytarmkhoian/herald/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/Herald$Provider {
+	public fun <init> (Ljava/lang/String;Lio/github/mkhytarmkhoian/herald/EventTrackerService;Lio/github/mkhytarmkhoian/herald/PropertyTrackerService;Lio/github/mkhytarmkhoian/herald/IdentifiableUserService;Lio/github/mkhytarmkhoian/herald/AnalyticsLifecycleService;Lio/github/mkhytarmkhoian/herald/ConsentService;)V
+	public synthetic fun <init> (Ljava/lang/String;Lio/github/mkhytarmkhoian/herald/EventTrackerService;Lio/github/mkhytarmkhoian/herald/PropertyTrackerService;Lio/github/mkhytarmkhoian/herald/IdentifiableUserService;Lio/github/mkhytarmkhoian/herald/AnalyticsLifecycleService;Lio/github/mkhytarmkhoian/herald/ConsentService;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getConsent ()Lio/github/mkhytarmkhoian/herald/ConsentService;
+	public final fun getEvents ()Lio/github/mkhytarmkhoian/herald/EventTrackerService;
+	public final fun getIdentity ()Lio/github/mkhytarmkhoian/herald/IdentifiableUserService;
+	public final fun getLifecycle ()Lio/github/mkhytarmkhoian/herald/AnalyticsLifecycleService;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getProperties ()Lio/github/mkhytarmkhoian/herald/PropertyTrackerService;
+}
+
+public final class io/github/mkhytarmkhoian/herald/HeraldBuilder {
+	public final fun dispatcher (Lkotlinx/coroutines/CoroutineDispatcher;)V
+	public final fun errorReporter (Lio/github/mkhytarmkhoian/herald/AnalyticsErrorReporter;)V
+	public final fun provider (Ljava/lang/String;Lio/github/mkhytarmkhoian/herald/EventTrackerService;Lio/github/mkhytarmkhoian/herald/PropertyTrackerService;Lio/github/mkhytarmkhoian/herald/IdentifiableUserService;Lio/github/mkhytarmkhoian/herald/AnalyticsLifecycleService;Lio/github/mkhytarmkhoian/herald/ConsentService;)V
+	public static synthetic fun provider$default (Lio/github/mkhytarmkhoian/herald/HeraldBuilder;Ljava/lang/String;Lio/github/mkhytarmkhoian/herald/EventTrackerService;Lio/github/mkhytarmkhoian/herald/PropertyTrackerService;Lio/github/mkhytarmkhoian/herald/IdentifiableUserService;Lio/github/mkhytarmkhoian/herald/AnalyticsLifecycleService;Lio/github/mkhytarmkhoian/herald/ConsentService;ILjava/lang/Object;)V
+	public final fun providers (Ljava/lang/Iterable;)V
+}
+
+public final class io/github/mkhytarmkhoian/herald/HeraldKt {
+	public static final fun Herald (Lkotlin/jvm/functions/Function1;)Lio/github/mkhytarmkhoian/herald/Herald;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/IdentifiableUserService {
+	public abstract fun identify (Lio/github/mkhytarmkhoian/herald/Identity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/Identity {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/github/mkhytarmkhoian/herald/Identity;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/Identity;Ljava/lang/String;ILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/Identity;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUserId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/ParametersBuilder {
+	public final fun put (Ljava/lang/String;D)V
+	public final fun put (Ljava/lang/String;F)V
+	public final fun put (Ljava/lang/String;I)V
+	public final fun put (Ljava/lang/String;J)V
+	public final fun put (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun put (Ljava/lang/String;Z)V
+}
+
+public final class io/github/mkhytarmkhoian/herald/ParametersKt {
+	public static final fun parameters (Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/Property {
+	public abstract fun getName ()Ljava/lang/String;
+	public abstract fun getValue ()Lio/github/mkhytarmkhoian/herald/AnalyticsValue;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/PropertyTrackerService {
+	public abstract fun set (Lio/github/mkhytarmkhoian/herald/Property;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/Resolution {
+	public abstract fun getHandlers ()Ljava/util/List;
+}
+
+public final class io/github/mkhytarmkhoian/herald/Resolution$Claimed : io/github/mkhytarmkhoian/herald/Resolution {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lio/github/mkhytarmkhoian/herald/Resolution$Claimed;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/Resolution$Claimed;Ljava/util/List;ILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/Resolution$Claimed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getHandlers ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/Resolution$Declined : io/github/mkhytarmkhoian/herald/Resolution {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/Resolution$Declined;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getHandlers ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/Resolution$Dropped : io/github/mkhytarmkhoian/herald/Resolution {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/Resolution$Dropped;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getHandlers ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/ScreenViewEvent : io/github/mkhytarmkhoian/herald/Event {
+	public abstract fun getScreenName ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/ScreenViewEvent$DefaultImpls {
+	public static fun getParameters (Lio/github/mkhytarmkhoian/herald/ScreenViewEvent;)Ljava/util/Map;
+}
+
+public final class io/github/mkhytarmkhoian/herald/UnhandledEventException : java/lang/IllegalStateException {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Event;)V
+	public final fun getEvent ()Lio/github/mkhytarmkhoian/herald/Event;
+}
+
+public final class io/github/mkhytarmkhoian/herald/UnhandledPropertyException : java/lang/IllegalStateException {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;)V
+	public final fun getProperty ()Lio/github/mkhytarmkhoian/herald/Property;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/UserProperty : io/github/mkhytarmkhoian/herald/Property {
+}
+
