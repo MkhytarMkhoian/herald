@@ -1,0 +1,108 @@
+public abstract interface class io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord {
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$EnabledSet : io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord {
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$EnabledSet;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$EnabledSet;ZILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$EnabledSet;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEnabled ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Flushed : io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Flushed;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Identified : io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Identity;)V
+	public final fun component1 ()Lio/github/mkhytarmkhoian/herald/Identity;
+	public final fun copy (Lio/github/mkhytarmkhoian/herald/Identity;)Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Identified;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Identified;Lio/github/mkhytarmkhoian/herald/Identity;ILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Identified;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIdentity ()Lio/github/mkhytarmkhoian/herald/Identity;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$PropertySet : io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;)V
+	public final fun component1 ()Lio/github/mkhytarmkhoian/herald/Property;
+	public final fun copy (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$PropertySet;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$PropertySet;Lio/github/mkhytarmkhoian/herald/Property;ILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$PropertySet;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getProperty ()Lio/github/mkhytarmkhoian/herald/Property;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Reset : io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Reset;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Started : io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Started;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Tracked : io/github/mkhytarmkhoian/herald/testing/AnalyticsRecord {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Event;)V
+	public final fun component1 ()Lio/github/mkhytarmkhoian/herald/Event;
+	public final fun copy (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Tracked;
+	public static synthetic fun copy$default (Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Tracked;Lio/github/mkhytarmkhoian/herald/Event;ILjava/lang/Object;)Lio/github/mkhytarmkhoian/herald/testing/AnalyticsRecord$Tracked;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEvent ()Lio/github/mkhytarmkhoian/herald/Event;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/FakeAnalyticsProvider : io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService, io/github/mkhytarmkhoian/herald/ConsentService, io/github/mkhytarmkhoian/herald/EventTrackerService, io/github/mkhytarmkhoian/herald/IdentifiableUserService, io/github/mkhytarmkhoian/herald/PropertyTrackerService {
+	public fun <init> ()V
+	public final fun assertIdentified (Ljava/lang/String;)V
+	public final fun assertNotTracked (Ljava/lang/String;)V
+	public final fun assertNothingElseTracked ()V
+	public final fun assertNothingTracked ()V
+	public final fun assertPropertySet (Ljava/lang/String;D)V
+	public final fun assertPropertySet (Ljava/lang/String;F)V
+	public final fun assertPropertySet (Ljava/lang/String;I)V
+	public final fun assertPropertySet (Ljava/lang/String;J)V
+	public final fun assertPropertySet (Ljava/lang/String;Lio/github/mkhytarmkhoian/herald/AnalyticsValue;)V
+	public final fun assertPropertySet (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun assertPropertySet (Ljava/lang/String;Z)V
+	public final fun assertTracked (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun assertTracked$default (Lio/github/mkhytarmkhoian/herald/testing/FakeAnalyticsProvider;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun assertTrackedTimes (Ljava/lang/String;I)V
+	public final fun clear ()V
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getEvents ()Ljava/util/List;
+	public final fun getProperties ()Ljava/util/List;
+	public final fun getRecords ()Ljava/util/List;
+	public fun identify (Lio/github/mkhytarmkhoian/herald/Identity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun set (Lio/github/mkhytarmkhoian/herald/Property;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun setEnabled (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun start (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun track (Lio/github/mkhytarmkhoian/herald/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/testing/TrackedEventAssert {
+	public final fun noParameters ()V
+	public final fun param (Ljava/lang/String;D)V
+	public final fun param (Ljava/lang/String;F)V
+	public final fun param (Ljava/lang/String;I)V
+	public final fun param (Ljava/lang/String;J)V
+	public final fun param (Ljava/lang/String;Lio/github/mkhytarmkhoian/herald/AnalyticsValue;)V
+	public final fun param (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun param (Ljava/lang/String;Z)V
+}
+
