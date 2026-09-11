@@ -1,0 +1,97 @@
+public final class io/github/mkhytarmkhoian/herald/mixpanel/CompositeMixpanelEventTrackerFactory : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTrackerFactory {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Lio/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTrackerFactory;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/CompositeMixpanelPropertySetterFactory : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetterFactory {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Lio/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetterFactory;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/GenericMixpanelEventTrackerFactory : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTrackerFactory {
+	public fun <init> (Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/GenericMixpanelPropertySetterFactory : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetterFactory {
+	public fun <init> (Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelAnalyticsService : io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService, io/github/mkhytarmkhoian/herald/ConsentService, io/github/mkhytarmkhoian/herald/IdentifiableUserService {
+	public fun <init> (Lcom/mixpanel/android/mpmetrics/MixpanelAPI;ZZ)V
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun identify (Lio/github/mkhytarmkhoian/herald/Identity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun setEnabled (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun start (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelAnalyticsTrackerService : io/github/mkhytarmkhoian/herald/EventTrackerService, io/github/mkhytarmkhoian/herald/PropertyTrackerService {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTrackerFactory;Lio/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetterFactory;)V
+	public fun set (Lio/github/mkhytarmkhoian/herald/Property;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun track (Lio/github/mkhytarmkhoian/herald/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTracker {
+	public abstract fun track ()V
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTrackerFactory {
+	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetter {
+	public abstract fun set ()V
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetterFactory {
+	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelValuesKt {
+	public static final fun getAsMixpanelValue (Lio/github/mkhytarmkhoian/herald/AnalyticsValue;)Ljava/lang/Object;
+	public static final fun toMixpanelProperties (Ljava/util/Map;)Ljava/util/Map;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/RequireMappedMixpanelEventTrackerFactory : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTrackerFactory {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/mixpanel/RequireMappedMixpanelEventTrackerFactory;
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/RequireMappedMixpanelPropertySetterFactory : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetterFactory {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/mixpanel/RequireMappedMixpanelPropertySetterFactory;
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/ScreenViewMixpanelEventTrackerFactory : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTrackerFactory {
+	public fun <init> (Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/UserPropertyMixpanelPropertySetterFactory : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetterFactory {
+	public fun <init> (Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/setters/GenericPropertySetter : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetter {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
+	public fun set ()V
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/setters/UserPropertySetter : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetter {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
+	public fun set ()V
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/trackers/GenericEventTracker : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTracker {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Event;Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
+	public fun track ()V
+}
+
+public final class io/github/mkhytarmkhoian/herald/mixpanel/trackers/ScreenViewEventTracker : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTracker {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/ScreenViewEvent;Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
+	public fun track ()V
+}

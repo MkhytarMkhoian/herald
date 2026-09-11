@@ -1,0 +1,34 @@
+# Single source of truth for versions, shared with the `build-logic` convention plugins.
+[versions]
+agp = "9.4.0"
+kotlin = "2.4.20"
+binary-compatibility-validator = "0.18.2"
+coroutines = "1.11.0"
+
+firebaseBom = "34.19.0"
+adjust = "5.8.0"
+mixpanel = "8.11.0"
+
+junit = "4.13.2"
+mockk = "1.14.11"
+
+[libraries]
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+
+adjust-android = { module = "com.adjust.sdk:adjust-android", version.ref = "adjust" }
+mixpanel-android = { module = "com.mixpanel.android:mixpanel-android", version.ref = "mixpanel" }
+
+junit = { module = "junit:junit", version.ref = "junit" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
+# Referenced by build-logic so the convention plugins and the modules agree on versions.
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+[plugins]
+binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
