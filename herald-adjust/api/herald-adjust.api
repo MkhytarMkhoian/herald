@@ -1,0 +1,120 @@
+public final class io/github/mkhytarmkhoian/herald/adjust/AdRevenueAdjustEventTrackerFactory : io/github/mkhytarmkhoian/herald/adjust/AdjustEventTrackerFactory {
+	public fun <init> (Lcom/adjust/sdk/AdjustInstance;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent : io/github/mkhytarmkhoian/herald/Event {
+	public fun getAdImpressionsCount ()Ljava/lang/Integer;
+	public fun getAdRevenueNetwork ()Ljava/lang/String;
+	public fun getAdRevenuePlacement ()Ljava/lang/String;
+	public fun getAdRevenueUnit ()Ljava/lang/String;
+	public abstract fun getCurrency ()Ljava/lang/String;
+	public abstract fun getRevenue ()D
+	public abstract fun getSource ()Ljava/lang/String;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent$DefaultImpls {
+	public static fun getAdImpressionsCount (Lio/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent;)Ljava/lang/Integer;
+	public static fun getAdRevenueNetwork (Lio/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent;)Ljava/lang/String;
+	public static fun getAdRevenuePlacement (Lio/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent;)Ljava/lang/String;
+	public static fun getAdRevenueUnit (Lio/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent;)Ljava/lang/String;
+	public static fun getParameters (Lio/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent;)Ljava/util/Map;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/AdRevenueEventKt {
+	public static final fun toAdjustAdRevenue (Lio/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent;)Lcom/adjust/sdk/AdjustAdRevenue;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/AdjustAnalyticsService : io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService, io/github/mkhytarmkhoian/herald/ConsentService, io/github/mkhytarmkhoian/herald/IdentifiableUserService {
+	public fun <init> (Lcom/adjust/sdk/AdjustInstance;Lcom/adjust/sdk/AdjustConfig;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/adjust/sdk/AdjustInstance;Lcom/adjust/sdk/AdjustConfig;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun identify (Lio/github/mkhytarmkhoian/herald/Identity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun setEnabled (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun start (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/AdjustAnalyticsTrackerService : io/github/mkhytarmkhoian/herald/EventTrackerService, io/github/mkhytarmkhoian/herald/PropertyTrackerService {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/adjust/AdjustEventTrackerFactory;Lio/github/mkhytarmkhoian/herald/adjust/AdjustPropertySetterFactory;)V
+	public fun set (Lio/github/mkhytarmkhoian/herald/Property;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun track (Lio/github/mkhytarmkhoian/herald/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/adjust/AdjustEventTracker {
+	public abstract fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/adjust/AdjustEventTrackerFactory {
+	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/AdjustEventTrackerKt {
+	public static final fun toAdjustEvent (Lio/github/mkhytarmkhoian/herald/Event;Ljava/lang/String;)Lcom/adjust/sdk/AdjustEvent;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/adjust/AdjustPropertySetter {
+	public abstract fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/adjust/AdjustPropertySetterFactory {
+	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/CompositeAdjustEventTrackerFactory : io/github/mkhytarmkhoian/herald/adjust/AdjustEventTrackerFactory {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Lio/github/mkhytarmkhoian/herald/adjust/AdjustEventTrackerFactory;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/CompositeAdjustPropertySetterFactory : io/github/mkhytarmkhoian/herald/adjust/AdjustPropertySetterFactory {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Lio/github/mkhytarmkhoian/herald/adjust/AdjustPropertySetterFactory;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/GenericAdjustPropertySetterFactory : io/github/mkhytarmkhoian/herald/adjust/AdjustPropertySetterFactory {
+	public fun <init> (Lcom/adjust/sdk/AdjustInstance;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/RequireMappedAdjustEventTrackerFactory : io/github/mkhytarmkhoian/herald/adjust/AdjustEventTrackerFactory {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/adjust/RequireMappedAdjustEventTrackerFactory;
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/RequireMappedAdjustPropertySetterFactory : io/github/mkhytarmkhoian/herald/adjust/AdjustPropertySetterFactory {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/adjust/RequireMappedAdjustPropertySetterFactory;
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/adjust/RevenueEvent : io/github/mkhytarmkhoian/herald/Event {
+	public abstract fun getCurrency ()Ljava/lang/String;
+	public fun getDeduplicationId ()Ljava/lang/String;
+	public abstract fun getRevenue ()D
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/RevenueEvent$DefaultImpls {
+	public static fun getDeduplicationId (Lio/github/mkhytarmkhoian/herald/adjust/RevenueEvent;)Ljava/lang/String;
+	public static fun getParameters (Lio/github/mkhytarmkhoian/herald/adjust/RevenueEvent;)Ljava/util/Map;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/TokenAdjustEventTrackerFactory : io/github/mkhytarmkhoian/herald/adjust/AdjustEventTrackerFactory {
+	public fun <init> (Ljava/util/Map;Lcom/adjust/sdk/AdjustInstance;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/setters/GenericPropertySetter : io/github/mkhytarmkhoian/herald/adjust/AdjustPropertySetter {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;Lcom/adjust/sdk/AdjustInstance;)V
+	public fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/trackers/AdRevenueEventTracker : io/github/mkhytarmkhoian/herald/adjust/AdjustEventTracker {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/adjust/AdRevenueEvent;Lcom/adjust/sdk/AdjustInstance;)V
+	public fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/adjust/trackers/TokenEventTracker : io/github/mkhytarmkhoian/herald/adjust/AdjustEventTracker {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Event;Ljava/lang/String;Lcom/adjust/sdk/AdjustInstance;)V
+	public fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}

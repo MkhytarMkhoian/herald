@@ -27,7 +27,6 @@ private fun Float.faithfulDouble(): Double = toString().toDouble()
  * stays aggregable. It has no boolean parameter type, so a flag is written as its string form.
  */
 public fun Map<String, AnalyticsValue>.toBundle(): Bundle = Bundle().apply {
-    // Not `forEach`: that resolves to `java.util.Map.forEach`, which is API 24 and minSdk is 23.
     for ((key, parameter) in this@toBundle) {
         when (parameter) {
             is AnalyticsValue.Int -> putLong(key, parameter.value.toLong())
