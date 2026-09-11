@@ -6,6 +6,7 @@ import io.github.mkhytarmkhoian.herald.AnalyticsValue
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 class UserPropertySetterTest {
@@ -16,7 +17,7 @@ class UserPropertySetterTest {
     }
 
     @Test
-    fun `On set should set property through people on mixpanel`() {
+    fun `On set should set property through people on mixpanel`() = runTest {
         val property = property("Property Name", AnalyticsValue.String("Property Value"))
 
         UserPropertySetter(property, mixpanel).set()
@@ -26,7 +27,7 @@ class UserPropertySetterTest {
     }
 
     @Test
-    fun `On set should keep a numeric property numeric, so mixpanel can filter on it`() {
+    fun `On set should keep a numeric property numeric, so mixpanel can filter on it`() = runTest {
         val property = property("total_purchases", AnalyticsValue.Int(42))
 
         UserPropertySetter(property, mixpanel).set()

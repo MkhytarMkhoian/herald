@@ -6,6 +6,7 @@ import io.github.mkhytarmkhoian.herald.Event
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 internal class GenericEventTrackerTest {
@@ -30,7 +31,7 @@ internal class GenericEventTrackerTest {
     private val genericEventTracker = GenericEventTracker(event, mixpanel)
 
     @Test
-    fun `On track should track the event name and its parameters on mixpanel`() {
+    fun `On track should track the event name and its parameters on mixpanel`() = runTest {
         genericEventTracker.track()
 
         verify {

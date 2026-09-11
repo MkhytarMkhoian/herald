@@ -10,7 +10,7 @@ public class GenericPropertySetter(
     private val mixpanel: MixpanelAPI
 ) : MixpanelPropertySetter {
 
-    override fun set() {
+    override suspend fun set() {
         mixpanel.updateSuperProperties { properties ->
             properties.put(property.name, property.value.asMixpanelValue)
             properties

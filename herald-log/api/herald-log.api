@@ -1,0 +1,87 @@
+public abstract interface class io/github/mkhytarmkhoian/herald/log/AnalyticsLogger {
+	public abstract fun log (Ljava/lang/String;)V
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/CompositeLogEventTrackerFactory : io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Lio/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/CompositeLogPropertySetterFactory : io/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Lio/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/GenericLogEventTrackerFactory : io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/GenericLogPropertySetterFactory : io/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/LogAnalyticsService : io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService, io/github/mkhytarmkhoian/herald/ConsentService, io/github/mkhytarmkhoian/herald/IdentifiableUserService {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun identify (Lio/github/mkhytarmkhoian/herald/Identity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun setEnabled (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun start (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/LogAnalyticsTrackerService : io/github/mkhytarmkhoian/herald/EventTrackerService, io/github/mkhytarmkhoian/herald/PropertyTrackerService {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory;Lio/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory;)V
+	public fun set (Lio/github/mkhytarmkhoian/herald/Property;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun track (Lio/github/mkhytarmkhoian/herald/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/log/LogEventTracker {
+	public abstract fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
+	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/log/LogPropertySetter {
+	public abstract fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory {
+	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/RequireMappedLogEventTrackerFactory : io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/log/RequireMappedLogEventTrackerFactory;
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/RequireMappedLogPropertySetterFactory : io/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/log/RequireMappedLogPropertySetterFactory;
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/ScreenViewLogEventTrackerFactory : io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/setters/GenericLogPropertySetter : io/github/mkhytarmkhoian/herald/log/LogPropertySetter {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
+	public fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/trackers/GenericEventTracker : io/github/mkhytarmkhoian/herald/log/LogEventTracker {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Event;Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
+	public fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/log/trackers/ScreenViewEventTracker : io/github/mkhytarmkhoian/herald/log/LogEventTracker {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/ScreenViewEvent;Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
+	public fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

@@ -7,5 +7,5 @@ package io.github.mkhytarmkhoian.herald.mixpanel
  * class.
  */
 public fun interface MixpanelEventTracker {
-    public fun track()
+    public suspend fun track()
 }

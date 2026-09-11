@@ -6,6 +6,7 @@ import io.github.mkhytarmkhoian.herald.ScreenViewEvent
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 class ScreenViewEventTrackerTest {
@@ -31,7 +32,7 @@ class ScreenViewEventTrackerTest {
     private val screenViewEventTracker = ScreenViewEventTracker(event, mixpanel)
 
     @Test
-    fun `On track should track screen view event with the screen name added`() {
+    fun `On track should track screen view event with the screen name added`() = runTest {
         screenViewEventTracker.track()
 
         verify { mixpanel.trackMap("screen_view", properties) }

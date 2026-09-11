@@ -15,7 +15,7 @@ public class ScreenViewEventTracker(
     private val mixpanel: MixpanelAPI,
 ) : MixpanelEventTracker {
 
-    override fun track() {
+    override suspend fun track() {
         val params = event.parameters.toMixpanelProperties() + (SCREEN_NAME to event.screenName)
         mixpanel.trackMap(SCREEN_VIEW, params)
     }

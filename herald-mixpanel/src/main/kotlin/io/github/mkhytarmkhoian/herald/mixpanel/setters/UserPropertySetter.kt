@@ -10,7 +10,7 @@ public class UserPropertySetter(
     private val mixpanel: MixpanelAPI
 ) : MixpanelPropertySetter {
 
-    override fun set() {
+    override suspend fun set() {
         mixpanel.people.set(property.name, property.value.asMixpanelValue)
     }
 }

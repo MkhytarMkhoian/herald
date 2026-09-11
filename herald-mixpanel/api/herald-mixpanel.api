@@ -36,7 +36,7 @@ public final class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelAnalyticsTra
 }
 
 public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTracker {
-	public abstract fun track ()V
+	public abstract fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTrackerFactory {
@@ -44,7 +44,7 @@ public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/Mixpane
 }
 
 public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetter {
-	public abstract fun set ()V
+	public abstract fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public abstract interface class io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetterFactory {
@@ -78,20 +78,20 @@ public final class io/github/mkhytarmkhoian/herald/mixpanel/UserPropertyMixpanel
 
 public final class io/github/mkhytarmkhoian/herald/mixpanel/setters/GenericPropertySetter : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetter {
 	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
-	public fun set ()V
+	public fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class io/github/mkhytarmkhoian/herald/mixpanel/setters/UserPropertySetter : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelPropertySetter {
 	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
-	public fun set ()V
+	public fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class io/github/mkhytarmkhoian/herald/mixpanel/trackers/GenericEventTracker : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTracker {
 	public fun <init> (Lio/github/mkhytarmkhoian/herald/Event;Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
-	public fun track ()V
+	public fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class io/github/mkhytarmkhoian/herald/mixpanel/trackers/ScreenViewEventTracker : io/github/mkhytarmkhoian/herald/mixpanel/MixpanelEventTracker {
 	public fun <init> (Lio/github/mkhytarmkhoian/herald/ScreenViewEvent;Lcom/mixpanel/android/mpmetrics/MixpanelAPI;)V
-	public fun track ()V
+	public fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }

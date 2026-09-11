@@ -3,6 +3,7 @@ package io.github.mkhytarmkhoian.herald.mixpanel
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import io.github.mkhytarmkhoian.herald.Event
 import io.github.mkhytarmkhoian.herald.Property
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
@@ -51,9 +52,9 @@ class MixpanelAnalyticsTrackerServiceTest {
         analyticsTrackerService.track(event)
 
         verify { eventTrackerFactory.create(event) }
-        verify { eventTracker1.track() }
-        verify { eventTracker2.track() }
-        verify { eventTracker3.track() }
+        coVerify { eventTracker1.track() }
+        coVerify { eventTracker2.track() }
+        coVerify { eventTracker3.track() }
     }
 
     @Test
@@ -73,8 +74,8 @@ class MixpanelAnalyticsTrackerServiceTest {
         analyticsTrackerService.set(property)
 
         verify { propertySetterFactory.create(property) }
-        verify { propertySetter1.set() }
-        verify { propertySetter2.set() }
-        verify { propertySetter3.set() }
+        coVerify { propertySetter1.set() }
+        coVerify { propertySetter2.set() }
+        coVerify { propertySetter3.set() }
     }
 }

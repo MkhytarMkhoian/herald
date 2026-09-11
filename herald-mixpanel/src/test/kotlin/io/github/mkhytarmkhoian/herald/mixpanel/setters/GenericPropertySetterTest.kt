@@ -7,13 +7,14 @@ import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
 import org.json.JSONObject
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 class GenericPropertySetterTest {
 
     private val mixpanel: MixpanelAPI = mockk(relaxed = true)
 
-    private fun updatedProperties(setter: GenericPropertySetter): JSONObject {
+    private suspend fun updatedProperties(setter: GenericPropertySetter): JSONObject {
         setter.set()
 
         val updateSlot = slot<SuperPropertyUpdate>()
@@ -22,7 +23,7 @@ class GenericPropertySetterTest {
     }
 
     @Test
-    fun `On set should update super properties on mixpanel`() {
+    fun `On set should update super properties on mixpanel`() = runTest {
         val property = property("Property Name", AnalyticsValue.String("Property Value"))
 
         val properties = updatedProperties(GenericPropertySetter(property, mixpanel))
@@ -31,7 +32,7 @@ class GenericPropertySetterTest {
     }
 
     @Test
-    fun `On set should keep a numeric property numeric, so mixpanel can filter on it`() {
+    fun `On set should keep a numeric property numeric, so mixpanel can filter on it`() = runTest {
         val property = property("total_purchases", AnalyticsValue.Int(42))
 
         val properties = updatedProperties(GenericPropertySetter(property, mixpanel))

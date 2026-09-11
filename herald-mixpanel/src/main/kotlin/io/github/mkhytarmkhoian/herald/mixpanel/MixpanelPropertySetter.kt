@@ -7,5 +7,5 @@ package io.github.mkhytarmkhoian.herald.mixpanel
  * class.
  */
 public fun interface MixpanelPropertySetter {
-    public fun set()
+    public suspend fun set()
 }

@@ -10,7 +10,7 @@ public class GenericEventTracker(
     private val mixpanel: MixpanelAPI,
 ) : MixpanelEventTracker {
 
-    override fun track() {
+    override suspend fun track() {
         mixpanel.trackMap(event.name, event.parameters.toMixpanelProperties())
     }
 }
