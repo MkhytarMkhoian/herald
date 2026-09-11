@@ -1,0 +1,86 @@
+public final class io/github/mkhytarmkhoian/herald/firebase/CompositeFirebaseEventTrackerFactory : io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTrackerFactory {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Lio/github/mkhytarmkhoian/herald/firebase/FirebaseEventTrackerFactory;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/CompositeFirebasePropertySetterFactory : io/github/mkhytarmkhoian/herald/firebase/FirebasePropertySetterFactory {
+	public fun <init> (Ljava/util/List;)V
+	public fun <init> ([Lio/github/mkhytarmkhoian/herald/firebase/FirebasePropertySetterFactory;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/FirebaseAnalyticsService : io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService, io/github/mkhytarmkhoian/herald/ConsentService, io/github/mkhytarmkhoian/herald/IdentifiableUserService {
+	public fun <init> (Lcom/google/firebase/analytics/FirebaseAnalytics;Z)V
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun identify (Lio/github/mkhytarmkhoian/herald/Identity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun setEnabled (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun start (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/FirebaseAnalyticsTrackerService : io/github/mkhytarmkhoian/herald/EventTrackerService, io/github/mkhytarmkhoian/herald/PropertyTrackerService {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/firebase/FirebaseEventTrackerFactory;Lio/github/mkhytarmkhoian/herald/firebase/FirebasePropertySetterFactory;)V
+	public fun set (Lio/github/mkhytarmkhoian/herald/Property;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun track (Lio/github/mkhytarmkhoian/herald/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTracker {
+	public abstract fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTrackerFactory {
+	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTrackerKt {
+	public static final fun toBundle (Ljava/util/Map;)Landroid/os/Bundle;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/firebase/FirebasePropertySetter {
+	public abstract fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/mkhytarmkhoian/herald/firebase/FirebasePropertySetterFactory {
+	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/GenericFirebaseEventTrackerFactory : io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTrackerFactory {
+	public fun <init> (Lcom/google/firebase/analytics/FirebaseAnalytics;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/GenericFirebasePropertySetterFactory : io/github/mkhytarmkhoian/herald/firebase/FirebasePropertySetterFactory {
+	public fun <init> (Lcom/google/firebase/analytics/FirebaseAnalytics;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/RequireMappedFirebaseEventTrackerFactory : io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTrackerFactory {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/firebase/RequireMappedFirebaseEventTrackerFactory;
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/RequireMappedFirebasePropertySetterFactory : io/github/mkhytarmkhoian/herald/firebase/FirebasePropertySetterFactory {
+	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/firebase/RequireMappedFirebasePropertySetterFactory;
+	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/ScreenViewFirebaseEventTrackerFactory : io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTrackerFactory {
+	public fun <init> (Lcom/google/firebase/analytics/FirebaseAnalytics;)V
+	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/setters/GenericPropertySetter : io/github/mkhytarmkhoian/herald/firebase/FirebasePropertySetter {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Property;Lcom/google/firebase/analytics/FirebaseAnalytics;)V
+	public fun set (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/trackers/GenericEventTracker : io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTracker {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/Event;Lcom/google/firebase/analytics/FirebaseAnalytics;)V
+	public fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/mkhytarmkhoian/herald/firebase/trackers/ScreenViewEventTracker : io/github/mkhytarmkhoian/herald/firebase/FirebaseEventTracker {
+	public fun <init> (Lio/github/mkhytarmkhoian/herald/ScreenViewEvent;Lcom/google/firebase/analytics/FirebaseAnalytics;)V
+	public fun track (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
