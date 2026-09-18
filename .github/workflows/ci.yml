@@ -1,0 +1,38 @@
+# Runs what `check` runs — tests, apiCheck, verifyApiValidationCoverage — on every push and pull
+# request, so the guards that are designed to fail loudly actually get a chance to.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: ./gradlew build
+
+      - name: Publish to Maven Local
+        # Proves every module still produces the artifacts Central requires (sources and javadoc
+        # jars, POM), without uploading anything.
+        run: ./gradlew publishToMavenLocal
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
