@@ -31,13 +31,14 @@ internal class AdjustAnalyticsServiceTest {
     }
 
     @Test
-    fun `On start should disable adjust after init, so a fresh install collects nothing until consent`() = runTest {
+    fun `On start should disable adjust before init, so a fresh install collects nothing until consent`() = runTest {
         adjustAnalyticsService.start()
 
-        // After, not before: Adjust ignores a disable() that arrives before initSdk().
+        // Before, not after: a disable() after initSdk() races the first session, which then
+        // reaches Adjust's servers. Observed on a device; see the class KDoc.
         verifyOrder {
-            adjust.initSdk(any())
             adjust.disable()
+            adjust.initSdk(any())
         }
     }
 

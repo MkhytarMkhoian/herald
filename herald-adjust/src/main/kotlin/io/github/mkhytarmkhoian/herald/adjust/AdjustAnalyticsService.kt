@@ -26,9 +26,12 @@ private const val DEFAULT_IDENTITY_PARAMETER = "user_id"
  * [start] calls [AdjustInstance.initSdk]; do not call it yourself. It does not register activity
  * lifecycle callbacks either — Adjust v5 registers its own at process start.
  *
- * **This adapter opts out for you.** [start] disables Adjust immediately after init, so a fresh
- * install collects nothing until [setEnabled] is called with `true`. Adjust persists that flag and
- * [start] overrides it every launch, so re-apply the stored consent decision after start-up.
+ * **This adapter opts out for you.** [start] disables Adjust *before* init, so a fresh install
+ * collects nothing until [setEnabled] is called with `true`. The order matters: a `disable()`
+ * issued before `initSdk` is applied synchronously as the SDK's starting state, while one issued
+ * after runs on Adjust's own executor and loses the race with the first session, which then
+ * reaches Adjust's servers. Adjust persists the enabled flag and [start] overrides it every
+ * launch, so re-apply the stored consent decision after start-up.
  *
  * @param identityParameter the Adjust global callback parameter [identify] writes the user id to
  * and [reset] removes. It must match a callback parameter configured in your Adjust dashboard.
@@ -51,8 +54,8 @@ public class AdjustAnalyticsService(
     }
 
     override suspend fun start() {
+        adjust.disable() // Before initSdk, so it is the SDK's starting state; see the class note.
         adjust.initSdk(config)
-        adjust.disable() // Collect nothing until setEnabled(true); see the note on the class.
     }
 
     override suspend fun setEnabled(enabled: Boolean) {
