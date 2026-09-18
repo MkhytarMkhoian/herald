@@ -1,5 +1,6 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.SourcesJar
+import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 
 /**
  * Maven Central publishing for every Herald module, through the Central Portal.
@@ -9,9 +10,10 @@ import com.vanniktech.maven.publish.SourcesJar
  * without both), GPG signatures on every file, and the upload itself. Dokka renders the javadoc
  * jar, so what ships is the KDoc.
  *
- * Nothing is uploaded by `build` or `check`. `publishToMavenLocal` needs no credentials while the
- * version is a `-SNAPSHOT`; `publishToMavenCentral` needs these, as Gradle properties or as
- * environment variables prefixed `ORG_GRADLE_PROJECT_`:
+ * Nothing is uploaded by `build` or `check`. `publishToMavenLocal` needs no credentials: signing is
+ * required only when a task publishes to a remote repository, so an unsigned upload to Central
+ * fails but the local and CI `publishToMavenLocal` never need a key. `publishToMavenCentral` needs
+ * these, as Gradle properties or as environment variables prefixed `ORG_GRADLE_PROJECT_`:
  *
  * - `mavenCentralUsername` / `mavenCentralPassword` — a Central Portal user token
  * - `signingInMemoryKey` / `signingInMemoryKeyPassword` — an ASCII-armored GPG private key
@@ -22,6 +24,7 @@ import com.vanniktech.maven.publish.SourcesJar
 plugins {
     id("com.vanniktech.maven.publish")
     id("org.jetbrains.dokka")
+    signing
 }
 
 mavenPublishing {
@@ -65,4 +68,10 @@ mavenPublishing {
             developerConnection.set("scm:git:ssh://git@github.com/MkhytarMkhoian/herald.git")
         }
     }
+}
+
+// Evaluated when the Sign tasks run, by which point the task graph is known. PublishToMavenLocal
+// is not a PublishToMavenRepository, so only a remote publish makes a missing key an error.
+signing {
+    setRequired({ gradle.taskGraph.allTasks.any { it is PublishToMavenRepository } })
 }
