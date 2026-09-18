@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.mixpanel
 
 import io.github.mkhytarmkhoian.herald.Event
 import io.github.mkhytarmkhoian.herald.Resolution
+import io.github.mkhytarmkhoian.herald.requireFallbackLast
 
 /**
  * Turns an event into the Mixpanel calls it should produce — or declines it.
@@ -18,6 +19,10 @@ public fun interface MixpanelEventTrackerFactory {
 public class CompositeMixpanelEventTrackerFactory(
     private val factories: List<MixpanelEventTrackerFactory>,
 ) : MixpanelEventTrackerFactory {
+
+    init {
+        requireFallbackLast(factories)
+    }
 
     public constructor(vararg factories: MixpanelEventTrackerFactory) : this(factories.toList())
 

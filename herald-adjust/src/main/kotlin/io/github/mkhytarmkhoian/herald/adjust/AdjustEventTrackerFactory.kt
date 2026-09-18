@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.adjust
 
 import io.github.mkhytarmkhoian.herald.Event
 import io.github.mkhytarmkhoian.herald.Resolution
+import io.github.mkhytarmkhoian.herald.requireFallbackLast
 
 /**
  * Turns an event into the Adjust calls it should produce — or declines it.
@@ -20,6 +21,10 @@ public fun interface AdjustEventTrackerFactory {
 public class CompositeAdjustEventTrackerFactory(
     private val factories: List<AdjustEventTrackerFactory>,
 ) : AdjustEventTrackerFactory {
+
+    init {
+        requireFallbackLast(factories)
+    }
 
     public constructor(vararg factories: AdjustEventTrackerFactory) : this(factories.toList())
 

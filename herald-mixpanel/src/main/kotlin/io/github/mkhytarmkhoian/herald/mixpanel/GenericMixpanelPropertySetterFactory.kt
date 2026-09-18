@@ -1,6 +1,7 @@
 package io.github.mkhytarmkhoian.herald.mixpanel
 
 import com.mixpanel.android.mpmetrics.MixpanelAPI
+import io.github.mkhytarmkhoian.herald.FallbackFactory
 import io.github.mkhytarmkhoian.herald.Property
 import io.github.mkhytarmkhoian.herald.Resolution
 import io.github.mkhytarmkhoian.herald.mixpanel.setters.GenericPropertySetter
@@ -12,7 +13,7 @@ import io.github.mkhytarmkhoian.herald.mixpanel.setters.GenericPropertySetter
  */
 public class GenericMixpanelPropertySetterFactory(
     private val mixpanel: MixpanelAPI,
-) : MixpanelPropertySetterFactory {
+) : MixpanelPropertySetterFactory, FallbackFactory {
 
     override fun create(property: Property): Resolution<MixpanelPropertySetter> =
         Resolution.Claimed(GenericPropertySetter(property, mixpanel))

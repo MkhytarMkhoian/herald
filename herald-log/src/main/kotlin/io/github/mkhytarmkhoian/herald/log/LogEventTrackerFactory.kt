@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.log
 
 import io.github.mkhytarmkhoian.herald.Event
 import io.github.mkhytarmkhoian.herald.Resolution
+import io.github.mkhytarmkhoian.herald.requireFallbackLast
 
 /**
  * Turns an event into the log lines it should produce — or declines it.
@@ -18,6 +19,10 @@ public fun interface LogEventTrackerFactory {
 public class CompositeLogEventTrackerFactory(
     private val factories: List<LogEventTrackerFactory>,
 ) : LogEventTrackerFactory {
+
+    init {
+        requireFallbackLast(factories)
+    }
 
     public constructor(vararg factories: LogEventTrackerFactory) : this(factories.toList())
 

@@ -14,12 +14,12 @@ public final class io/github/mkhytarmkhoian/herald/log/CompositeLogPropertySette
 	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
 }
 
-public final class io/github/mkhytarmkhoian/herald/log/GenericLogEventTrackerFactory : io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
+public final class io/github/mkhytarmkhoian/herald/log/GenericLogEventTrackerFactory : io/github/mkhytarmkhoian/herald/FallbackFactory, io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
 	public fun <init> (Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
 	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
 }
 
-public final class io/github/mkhytarmkhoian/herald/log/GenericLogPropertySetterFactory : io/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory {
+public final class io/github/mkhytarmkhoian/herald/log/GenericLogPropertySetterFactory : io/github/mkhytarmkhoian/herald/FallbackFactory, io/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory {
 	public fun <init> (Lio/github/mkhytarmkhoian/herald/log/AnalyticsLogger;)V
 	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
 }
@@ -55,12 +55,12 @@ public abstract interface class io/github/mkhytarmkhoian/herald/log/LogPropertyS
 	public abstract fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
 }
 
-public final class io/github/mkhytarmkhoian/herald/log/RequireMappedLogEventTrackerFactory : io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
+public final class io/github/mkhytarmkhoian/herald/log/RequireMappedLogEventTrackerFactory : io/github/mkhytarmkhoian/herald/FallbackFactory, io/github/mkhytarmkhoian/herald/log/LogEventTrackerFactory {
 	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/log/RequireMappedLogEventTrackerFactory;
 	public fun create (Lio/github/mkhytarmkhoian/herald/Event;)Lio/github/mkhytarmkhoian/herald/Resolution;
 }
 
-public final class io/github/mkhytarmkhoian/herald/log/RequireMappedLogPropertySetterFactory : io/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory {
+public final class io/github/mkhytarmkhoian/herald/log/RequireMappedLogPropertySetterFactory : io/github/mkhytarmkhoian/herald/FallbackFactory, io/github/mkhytarmkhoian/herald/log/LogPropertySetterFactory {
 	public static final field INSTANCE Lio/github/mkhytarmkhoian/herald/log/RequireMappedLogPropertySetterFactory;
 	public fun create (Lio/github/mkhytarmkhoian/herald/Property;)Lio/github/mkhytarmkhoian/herald/Resolution;
 }

@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.adjust
 
 import io.github.mkhytarmkhoian.herald.Property
 import io.github.mkhytarmkhoian.herald.Resolution
+import io.github.mkhytarmkhoian.herald.requireFallbackLast
 
 /** The [AdjustEventTrackerFactory] counterpart for properties, with the same partial contract. */
 public fun interface AdjustPropertySetterFactory {
@@ -12,6 +13,10 @@ public fun interface AdjustPropertySetterFactory {
 public class CompositeAdjustPropertySetterFactory(
     private val factories: List<AdjustPropertySetterFactory>,
 ) : AdjustPropertySetterFactory {
+
+    init {
+        requireFallbackLast(factories)
+    }
 
     public constructor(vararg factories: AdjustPropertySetterFactory) : this(factories.toList())
 

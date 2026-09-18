@@ -1,6 +1,7 @@
 package io.github.mkhytarmkhoian.herald.adjust
 
 import com.adjust.sdk.AdjustInstance
+import io.github.mkhytarmkhoian.herald.FallbackFactory
 import io.github.mkhytarmkhoian.herald.Property
 import io.github.mkhytarmkhoian.herald.Resolution
 import io.github.mkhytarmkhoian.herald.adjust.setters.GenericPropertySetter
@@ -16,7 +17,7 @@ import io.github.mkhytarmkhoian.herald.adjust.setters.GenericPropertySetter
  */
 public class GenericAdjustPropertySetterFactory(
     private val adjust: AdjustInstance,
-) : AdjustPropertySetterFactory {
+) : AdjustPropertySetterFactory, FallbackFactory {
 
     override fun create(property: Property): Resolution<AdjustPropertySetter> =
         Resolution.Claimed(GenericPropertySetter(property, adjust))

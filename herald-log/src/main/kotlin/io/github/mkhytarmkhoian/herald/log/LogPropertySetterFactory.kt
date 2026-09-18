@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.log
 
 import io.github.mkhytarmkhoian.herald.Property
 import io.github.mkhytarmkhoian.herald.Resolution
+import io.github.mkhytarmkhoian.herald.requireFallbackLast
 
 /** The [LogEventTrackerFactory] counterpart for properties, with the same partial contract. */
 public fun interface LogPropertySetterFactory {
@@ -12,6 +13,10 @@ public fun interface LogPropertySetterFactory {
 public class CompositeLogPropertySetterFactory(
     private val factories: List<LogPropertySetterFactory>,
 ) : LogPropertySetterFactory {
+
+    init {
+        requireFallbackLast(factories)
+    }
 
     public constructor(vararg factories: LogPropertySetterFactory) : this(factories.toList())
 

@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.firebase
 
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.github.mkhytarmkhoian.herald.Event
+import io.github.mkhytarmkhoian.herald.FallbackFactory
 import io.github.mkhytarmkhoian.herald.Resolution
 import io.github.mkhytarmkhoian.herald.firebase.trackers.GenericEventTracker
 
@@ -11,7 +12,7 @@ import io.github.mkhytarmkhoian.herald.firebase.trackers.GenericEventTracker
  */
 public class GenericFirebaseEventTrackerFactory(
     private val firebaseAnalytics: FirebaseAnalytics,
-) : FirebaseEventTrackerFactory {
+) : FirebaseEventTrackerFactory, FallbackFactory {
 
     override fun create(event: Event): Resolution<FirebaseEventTracker> =
         Resolution.Claimed(GenericEventTracker(event, firebaseAnalytics))

@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.mixpanel
 
 import io.github.mkhytarmkhoian.herald.Property
 import io.github.mkhytarmkhoian.herald.Resolution
+import io.github.mkhytarmkhoian.herald.requireFallbackLast
 
 /**
  * The [MixpanelEventTrackerFactory] counterpart for properties, with the same partial contract.
@@ -14,6 +15,10 @@ public fun interface MixpanelPropertySetterFactory {
 public class CompositeMixpanelPropertySetterFactory(
     private val factories: List<MixpanelPropertySetterFactory>,
 ) : MixpanelPropertySetterFactory {
+
+    init {
+        requireFallbackLast(factories)
+    }
 
     public constructor(vararg factories: MixpanelPropertySetterFactory) : this(factories.toList())
 

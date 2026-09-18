@@ -188,6 +188,13 @@ public abstract interface class io/github/mkhytarmkhoian/herald/EventTrackerServ
 	public abstract fun track (Lio/github/mkhytarmkhoian/herald/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
+public abstract interface class io/github/mkhytarmkhoian/herald/FallbackFactory {
+}
+
+public final class io/github/mkhytarmkhoian/herald/FallbackFactoryKt {
+	public static final fun requireFallbackLast (Ljava/util/List;)V
+}
+
 public final class io/github/mkhytarmkhoian/herald/Herald : io/github/mkhytarmkhoian/herald/AnalyticsLifecycleService, io/github/mkhytarmkhoian/herald/ConsentService, io/github/mkhytarmkhoian/herald/EventTrackerService, io/github/mkhytarmkhoian/herald/IdentifiableUserService, io/github/mkhytarmkhoian/herald/PropertyTrackerService {
 	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun identify (Lio/github/mkhytarmkhoian/herald/Identity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

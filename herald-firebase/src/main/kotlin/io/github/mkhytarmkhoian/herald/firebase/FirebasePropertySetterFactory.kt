@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.firebase
 
 import io.github.mkhytarmkhoian.herald.Property
 import io.github.mkhytarmkhoian.herald.Resolution
+import io.github.mkhytarmkhoian.herald.requireFallbackLast
 
 /** The [FirebaseEventTrackerFactory] counterpart for properties, with the same partial contract. */
 public fun interface FirebasePropertySetterFactory {
@@ -12,6 +13,10 @@ public fun interface FirebasePropertySetterFactory {
 public class CompositeFirebasePropertySetterFactory(
     private val factories: List<FirebasePropertySetterFactory>,
 ) : FirebasePropertySetterFactory {
+
+    init {
+        requireFallbackLast(factories)
+    }
 
     public constructor(vararg factories: FirebasePropertySetterFactory) : this(factories.toList())
 

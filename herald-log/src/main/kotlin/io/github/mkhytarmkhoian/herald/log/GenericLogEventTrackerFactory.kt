@@ -1,6 +1,7 @@
 package io.github.mkhytarmkhoian.herald.log
 
 import io.github.mkhytarmkhoian.herald.Event
+import io.github.mkhytarmkhoian.herald.FallbackFactory
 import io.github.mkhytarmkhoian.herald.Resolution
 import io.github.mkhytarmkhoian.herald.log.trackers.GenericEventTracker
 
@@ -9,7 +10,7 @@ import io.github.mkhytarmkhoian.herald.log.trackers.GenericEventTracker
  */
 public class GenericLogEventTrackerFactory(
     private val logger: AnalyticsLogger,
-) : LogEventTrackerFactory {
+) : LogEventTrackerFactory, FallbackFactory {
 
     override fun create(event: Event): Resolution<LogEventTracker> =
         Resolution.Claimed(GenericEventTracker(event, logger))

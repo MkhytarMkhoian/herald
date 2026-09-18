@@ -1,10 +1,11 @@
 package io.github.mkhytarmkhoian.herald.adjust
 
 import io.github.mkhytarmkhoian.herald.Event
+import io.github.mkhytarmkhoian.herald.FallbackFactory
 import io.github.mkhytarmkhoian.herald.Property
+import io.github.mkhytarmkhoian.herald.Resolution
 import io.github.mkhytarmkhoian.herald.UnhandledEventException
 import io.github.mkhytarmkhoian.herald.UnhandledPropertyException
-import io.github.mkhytarmkhoian.herald.Resolution
 
 /**
  * Fails on any event that reaches it. Put it last in a chain to turn an event nobody wired up into
@@ -13,7 +14,7 @@ import io.github.mkhytarmkhoian.herald.Resolution
  * Rarely what you want for Adjust: an event reaches it only with a token, so most events are
  * expected to go unclaimed and this would fail on all of them.
  */
-public object RequireMappedAdjustEventTrackerFactory : AdjustEventTrackerFactory {
+public object RequireMappedAdjustEventTrackerFactory : AdjustEventTrackerFactory, FallbackFactory {
     override fun create(event: Event): Resolution<AdjustEventTracker> = throw UnhandledEventException(event)
 }
 
@@ -24,7 +25,7 @@ public object RequireMappedAdjustEventTrackerFactory : AdjustEventTrackerFactory
  * Unlike events, this is a real choice: every property can reach Adjust, so failing on an
  * unclaimed one is a reasonable policy.
  */
-public object RequireMappedAdjustPropertySetterFactory : AdjustPropertySetterFactory {
+public object RequireMappedAdjustPropertySetterFactory : AdjustPropertySetterFactory, FallbackFactory {
     override fun create(property: Property): Resolution<AdjustPropertySetter> =
         throw UnhandledPropertyException(property)
 }

@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.mixpanel
 
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import io.github.mkhytarmkhoian.herald.Event
+import io.github.mkhytarmkhoian.herald.FallbackFactory
 import io.github.mkhytarmkhoian.herald.Resolution
 import io.github.mkhytarmkhoian.herald.mixpanel.trackers.GenericEventTracker
 
@@ -11,7 +12,7 @@ import io.github.mkhytarmkhoian.herald.mixpanel.trackers.GenericEventTracker
  */
 public class GenericMixpanelEventTrackerFactory(
     private val mixpanel: MixpanelAPI,
-) : MixpanelEventTrackerFactory {
+) : MixpanelEventTrackerFactory, FallbackFactory {
 
     override fun create(event: Event): Resolution<MixpanelEventTracker> =
         Resolution.Claimed(GenericEventTracker(event, mixpanel))
