@@ -1,0 +1,36 @@
+package io.github.mkhytarmkhoian.herald.amplitude
+
+import io.github.mkhytarmkhoian.herald.Event
+import io.github.mkhytarmkhoian.herald.Resolution
+import io.github.mkhytarmkhoian.herald.requireFallbackLast
+
+/**
+ * Turns an event into the Amplitude calls it should produce — or declines it.
+ *
+ * [Resolution.Declined] passes the event to the next factory; [Resolution.Claimed] and
+ * [Resolution.Dropped] both end the search, the first sending its handlers and the second sending
+ * nothing.
+ */
+public fun interface AmplitudeEventTrackerFactory {
+    public fun create(event: Event): Resolution<AmplitudeEventTracker>
+}
+
+/** Asks each factory in order and takes the first answer that is not a decline. */
+public class CompositeAmplitudeEventTrackerFactory(
+    private val factories: List<AmplitudeEventTrackerFactory>,
+) : AmplitudeEventTrackerFactory {
+
+    init {
+        requireFallbackLast(factories)
+    }
+
+    public constructor(vararg factories: AmplitudeEventTrackerFactory) : this(factories.toList())
+
+    override fun create(event: Event): Resolution<AmplitudeEventTracker> {
+        for (factory in factories) {
+            val resolution = factory.create(event)
+            if (resolution !is Resolution.Declined) return resolution
+        }
+        return Resolution.Declined
+    }
+}

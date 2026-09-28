@@ -3,7 +3,8 @@
 > "A herald announces an event to whoever is listening"
 
 A pluggable analytics library for Android. One core domain, one fan-out, and a separate module per
-third-party service, so a consumer takes Firebase without dragging in Adjust or Mixpanel.
+third-party service, so a consumer takes Firebase without dragging in Adjust, Mixpanel, AppsFlyer
+or Amplitude.
 
 ## Status
 
@@ -19,6 +20,8 @@ tracked by `apiCheck`; breaking changes come only with a major version.
 | `herald-firebase` | Firebase / GA4 adapter. |
 | `herald-adjust` | Adjust adapter: token mapping, plus purchase and ad revenue. |
 | `herald-mixpanel` | Mixpanel adapter, covering both stores: the people profile and super properties. |
+| `herald-appsflyer` | AppsFlyer adapter: events and ad revenue. AppsFlyer keeps no user attributes, so it takes no properties. |
+| `herald-amplitude` | Amplitude adapter: events, user properties, Amplitude's reserved screen view and its revenue API. |
 | `herald-compose` | `LocalEventTrackerService`, `TrackScreenView` / `TrackOnLifecycleEvent`, `rememberTracker()` and `Modifier.trackImpression`, for composables that track without a ViewModel. No DI framework. |
 | `herald-testing` | `FakeAnalyticsProvider` — a vendor that records instead of sending, for your tests. |
 
@@ -252,25 +255,29 @@ vendor SDK the consumer already owns, next to the API key and data residency.
 
 ### Before consent arrives
 
-**Herald does not make a fresh install silent for you, except on Adjust.** Two of the three vendors
-default to collecting, and their off switches are construction-time settings on objects you own —
-not something an adapter can flip in `start()` without destroying data or overwriting your choice.
-Set them where you build the SDK:
+**Herald does not make a fresh install silent for you, except on Adjust and AppsFlyer.** The other
+three vendors default to collecting, and their off switches are construction-time settings on
+objects you own — not something an adapter can flip in `start()` without destroying data or
+overwriting your choice. Set them where you build the SDK:
 
 | Vendor | Fresh install collects? | Turn it off where |
 | --- | --- | --- |
 | **Adjust** | no — the adapter calls `disable()` before `initSdk()` in `start()` | already handled |
 | **Firebase** | **yes** | `firebase_analytics_collection_enabled=false` in `AndroidManifest.xml` |
 | **Mixpanel** | **yes** | `MixpanelOptions.Builder().optOutTrackingDefault(true)` on the instance you pass in |
+| **AppsFlyer** | no — the adapter calls `stop(true)` before `start()` in `start()` | already handled |
+| **Amplitude** | **yes** | `Configuration(apiKey, context, optOut = true)` on the instance you pass in |
 
-Adjust is the exception because its flag is only a flag. Mixpanel's `optOutTracking()` deletes
-unflushed events and clears the stored identity, so calling it every launch would discard the
-previous session and de-identify a user who had already consented; Firebase's switch is read from
-the manifest at initialisation, before any Herald code runs. Once consent is recorded,
-`setEnabled(true)` covers all three.
+Adjust and AppsFlyer are the exceptions because their flags are only flags. Mixpanel's
+`optOutTracking()` deletes unflushed events and clears the stored identity, so calling it every
+launch would discard the previous session and de-identify a user who had already consented;
+Firebase's switch is read from the manifest at initialisation, before any Herald code runs;
+Amplitude's is part of the `Configuration` it is built from. Once consent is recorded,
+`setEnabled(true)` covers all five.
 
-Adjust also persists its flag, and `start()` overrides it on every launch — so re-apply the stored
-decision after start-up rather than relying on Adjust to remember it.
+Adjust persists its flag and `start()` overrides it on every launch; AppsFlyer and Amplitude do not
+persist theirs at all. Either way, re-apply the stored decision after start-up rather than relying
+on a vendor to remember it.
 
 Bind **only** `Herald` to those interfaces, never the adapters. `FirebaseAnalyticsTrackerService`
 also satisfies `EventTrackerService`, so if it is bound too, a class can be injected with it and
@@ -534,6 +541,14 @@ data class SubscriptionPurchased(
 One event, three vendors: Firebase's generic factory logs `purchase` with typed parameters, Adjust
 sends it under its token with revenue attached, and Mixpanel gets the parameters as JSON. Nothing
 in `herald-core` changed, and the module that owns the event still owns its analytics.
+
+The other two adapters fall on either side of the same rule. AppsFlyer's `af_purchase` is an
+ordinary event whose `af_revenue` and `af_currency` are parameters, like GA4's, so it needs no
+marker — while its ad revenue is a different call, so `herald-appsflyer` has an `AdRevenueEvent` of
+its own, in AppsFlyer's shape. Amplitude records a purchase through a dedicated `revenue(Revenue)`
+call, so `herald-amplitude` ships a `RevenueEvent` in Amplitude's vocabulary — `price`, `quantity`,
+`productId` — claimed by `RevenueAmplitudeEventTrackerFactory`. The markers share `revenue` and
+`currency` with Adjust's, so one event class can implement both and reach both vendors.
 
 The same shape works for a marker of your own — a typed interface, a tracker per vendor that
 handles it differently, and one line in each chain before Herald's factories so yours wins:

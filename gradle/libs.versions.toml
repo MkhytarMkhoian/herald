@@ -13,6 +13,8 @@ lifecycle = "2.11.0"
 firebaseBom = "34.19.0"
 adjust = "5.8.0"
 mixpanel = "8.11.0"
+appsflyer = "7.0.1"
+amplitude = "1.33.0"
 
 junit = "4.13.2"
 mockk = "1.14.11"
@@ -34,6 +36,8 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 
 adjust-android = { module = "com.adjust.sdk:adjust-android", version.ref = "adjust" }
 mixpanel-android = { module = "com.mixpanel.android:mixpanel-android", version.ref = "mixpanel" }
+appsflyer-android = { module = "com.appsflyer:af-android-sdk", version.ref = "appsflyer" }
+amplitude-android = { module = "com.amplitude:analytics-android", version.ref = "amplitude" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

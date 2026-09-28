@@ -44,6 +44,8 @@ plugins {
 // decision recorded in the build rather than something you notice by reading a task list.
 val unvalidatedByDesign = setOf(
     "herald-adjust",
+    "herald-amplitude",
+    "herald-appsflyer",
     "herald-firebase",
     "herald-mixpanel",
     "herald-compose",
