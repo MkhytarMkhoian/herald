@@ -20,7 +20,7 @@ tracked by `apiCheck`; breaking changes come only with a major version.
 | `herald-firebase` | Firebase / GA4 adapter. |
 | `herald-adjust` | Adjust adapter: token mapping, plus purchase and ad revenue. |
 | `herald-mixpanel` | Mixpanel adapter, covering both stores: the people profile and super properties. |
-| `herald-appsflyer` | AppsFlyer adapter: events and ad revenue. AppsFlyer keeps no user attributes, so it takes no properties. |
+| `herald-appsflyer` | AppsFlyer adapter: events, purchase and subscription revenue, and ad revenue. AppsFlyer keeps no user attributes, so it takes no properties. |
 | `herald-amplitude` | Amplitude adapter: events, user properties, Amplitude's reserved screen view and its revenue API. |
 | `herald-compose` | `LocalEventTrackerService`, `TrackScreenView` / `TrackOnLifecycleEvent`, `rememberTracker()` and `Modifier.trackImpression`, for composables that track without a ViewModel. No DI framework. |
 | `herald-testing` | `FakeAnalyticsProvider` — a vendor that records instead of sending, for your tests. |
@@ -265,7 +265,7 @@ overwriting your choice. Set them where you build the SDK:
 | **Adjust** | no — the adapter calls `disable()` before `initSdk()` in `start()` | already handled |
 | **Firebase** | **yes** | `firebase_analytics_collection_enabled=false` in `AndroidManifest.xml` |
 | **Mixpanel** | **yes** | `MixpanelOptions.Builder().optOutTrackingDefault(true)` on the instance you pass in |
-| **AppsFlyer** | no — the adapter calls `stop(true)` before `start()` in `start()` | already handled |
+| **AppsFlyer** | no — the adapter's `start()` only calls `stop(true)`; AppsFlyer starts on `setEnabled(true)` | already handled |
 | **Amplitude** | **yes** | `Configuration(apiKey, context, optOut = true)` on the instance you pass in |
 
 Adjust and AppsFlyer are the exceptions because their flags are only flags. Mixpanel's
@@ -542,13 +542,15 @@ One event, three vendors: Firebase's generic factory logs `purchase` with typed 
 sends it under its token with revenue attached, and Mixpanel gets the parameters as JSON. Nothing
 in `herald-core` changed, and the module that owns the event still owns its analytics.
 
-The other two adapters fall on either side of the same rule. AppsFlyer's `af_purchase` is an
-ordinary event whose `af_revenue` and `af_currency` are parameters, like GA4's, so it needs no
-marker — while its ad revenue is a different call, so `herald-appsflyer` has an `AdRevenueEvent` of
-its own, in AppsFlyer's shape. Amplitude records a purchase through a dedicated `revenue(Revenue)`
-call, so `herald-amplitude` ships a `RevenueEvent` in Amplitude's vocabulary — `price`, `quantity`,
-`productId` — claimed by `RevenueAmplitudeEventTrackerFactory`. The markers share `revenue` and
-`currency` with Adjust's, so one event class can implement both and reach both vendors.
+The other two adapters follow the same rule. AppsFlyer counts revenue only under its predefined
+`af_revenue` key, so `herald-appsflyer` has `PurchaseEvent` and `SubscribeEvent`, which send
+`af_purchase` and `af_subscribe` with typed fields under AppsFlyer's keys — the same `logEvent` call
+with more fields, as Adjust's revenue is the same `trackEvent` — while ad revenue is a different
+call, `logAdRevenue`, with an `AdRevenueEvent` of its own. Amplitude records a purchase through a
+dedicated `revenue(Revenue)` call, so `herald-amplitude` ships a `RevenueEvent` in Amplitude's
+vocabulary — `price`, `quantity`, `productId` — claimed by `RevenueAmplitudeEventTrackerFactory`.
+The markers share `revenue` and `currency` with Adjust's, so one event class can implement several
+and reach every vendor that has one.
 
 The same shape works for a marker of your own — a typed interface, a tracker per vendor that
 handles it differently, and one line in each chain before Herald's factories so yours wins:

@@ -12,8 +12,7 @@ import io.github.mkhytarmkhoian.herald.Event
  * `AFAdRevenueData`'s. Claimed by [AdRevenueAppsFlyerEventTrackerFactory]. [name] does not reach
  * AppsFlyer; [parameters] travel as the additional parameters of the ad-revenue call.
  *
- * Purchase revenue needs no marker: AppsFlyer's `af_purchase` is an ordinary event whose
- * `af_revenue` and `af_currency` are parameters.
+ * For revenue from a purchase or a subscription, see [PurchaseEvent] and [SubscribeEvent].
  *
  * The same event can implement Adjust's `AdRevenueEvent` as well — [revenue] and [currency] are
  * shared — so one impression callback reaches both.
