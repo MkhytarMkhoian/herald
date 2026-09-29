@@ -10,7 +10,6 @@ import io.github.mkhytarmkhoian.herald.UnhandledPropertyException
 import io.github.mkhytarmkhoian.herald.UserProperty
 import io.github.mkhytarmkhoian.herald.amplitude.setters.GenericPropertySetter
 import io.github.mkhytarmkhoian.herald.amplitude.trackers.GenericEventTracker
-import io.github.mkhytarmkhoian.herald.amplitude.trackers.RevenueEventTracker
 import io.github.mkhytarmkhoian.herald.amplitude.trackers.ScreenViewEventTracker
 import io.mockk.every
 import io.mockk.mockk
@@ -37,14 +36,6 @@ internal class AmplitudeFactoriesTest {
         val factory = ScreenViewAmplitudeEventTrackerFactory(amplitude)
 
         assertIs<ScreenViewEventTracker>(factory.create(mockk<ScreenViewEvent>()).handlers.single())
-        assertEquals(Resolution.Declined, factory.create(mockk<Event>()))
-    }
-
-    @Test
-    fun `Revenue factory should claim a RevenueEvent and decline the rest`() {
-        val factory = RevenueAmplitudeEventTrackerFactory(amplitude)
-
-        assertIs<RevenueEventTracker>(factory.create(mockk<RevenueEvent>()).handlers.single())
         assertEquals(Resolution.Declined, factory.create(mockk<Event>()))
     }
 

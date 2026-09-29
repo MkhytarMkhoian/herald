@@ -1,14 +1,14 @@
 package io.github.mkhytarmkhoian.herald.appsflyer.trackers
 
 import com.appsflyer.AppsFlyerLib
-import io.github.mkhytarmkhoian.herald.appsflyer.AdRevenueEvent
+import io.github.mkhytarmkhoian.herald.appsflyer.AppsFlyerAdRevenueEvent
 import io.github.mkhytarmkhoian.herald.appsflyer.AppsFlyerEventTracker
 import io.github.mkhytarmkhoian.herald.appsflyer.toAFAdRevenueData
 import io.github.mkhytarmkhoian.herald.appsflyer.toAppsFlyerEventValues
 
-/** Sends one [AdRevenueEvent] through AppsFlyer's ad-revenue API. */
+/** Sends one [AppsFlyerAdRevenueEvent] through AppsFlyer's ad-revenue API. */
 public class AdRevenueEventTracker(
-    private val event: AdRevenueEvent,
+    private val event: AppsFlyerAdRevenueEvent,
     private val appsFlyer: AppsFlyerLib,
 ) : AppsFlyerEventTracker {
 

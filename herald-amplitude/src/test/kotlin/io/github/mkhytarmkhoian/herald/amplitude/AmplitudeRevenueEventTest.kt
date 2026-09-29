@@ -5,28 +5,35 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-internal class RevenueEventTest {
+internal class AmplitudeRevenueEventTest {
 
-    private class Purchase(
-        override val quantity: Int = 1,
-        override val productId: String? = null,
-        override val revenueType: String? = null,
-        override val currency: String? = null,
-        override val revenue: Double? = null,
-        override val receipt: String? = null,
-        override val receiptSig: String? = null,
-    ) : RevenueEvent {
-        override val name = "purchase"
-        override val price = 4.99
-        override val parameters = mapOf<String, AnalyticsValue>(
+    private fun purchase(
+        quantity: Int = 1,
+        productId: String? = null,
+        revenueType: String? = null,
+        currency: String? = null,
+        revenue: Double? = null,
+        receipt: String? = null,
+        receiptSig: String? = null,
+    ) = AmplitudeRevenueEvent(
+        name = "purchase",
+        price = 4.99,
+        quantity = quantity,
+        productId = productId,
+        revenueType = revenueType,
+        currency = currency,
+        revenue = revenue,
+        receipt = receipt,
+        receiptSig = receiptSig,
+        parameters = mapOf(
             "plan" to AnalyticsValue.String("pro"),
             "seats" to AnalyticsValue.Int(3),
-        )
-    }
+        ),
+    )
 
     @Test
     fun `On toAmplitudeRevenue should carry every field, parameters as typed properties`() {
-        val result = Purchase(
+        val result = purchase(
             quantity = 2,
             productId = "pro_monthly",
             revenueType = "subscription",
@@ -49,7 +56,7 @@ internal class RevenueEventTest {
 
     @Test
     fun `On toAmplitudeRevenue an absent optional should stay unset, not become a default`() {
-        val result = Purchase().toAmplitudeRevenue()
+        val result = purchase().toAmplitudeRevenue()
 
         assertEquals(1, result.quantity)
         assertNull(result.productId)

@@ -1,7 +1,7 @@
 package io.github.mkhytarmkhoian.herald.adjust.trackers
 
 import com.adjust.sdk.AdjustInstance
-import io.github.mkhytarmkhoian.herald.adjust.AdRevenueEvent
+import io.github.mkhytarmkhoian.herald.adjust.AdjustAdRevenueEvent
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.test.runTest
@@ -10,12 +10,12 @@ import kotlin.test.assertEquals
 
 internal class AdRevenueEventTrackerTest {
 
-    private val event = object : AdRevenueEvent {
-        override val name = "ad_impression"
-        override val source = "admob_sdk"
-        override val revenue = 0.01
-        override val currency = "EUR"
-    }
+    private val event = AdjustAdRevenueEvent(
+        name = "ad_impression",
+        source = "admob_sdk",
+        revenue = 0.01,
+        currency = "EUR",
+    )
     private val adjust: AdjustInstance = mockk(relaxed = true)
 
     @Test

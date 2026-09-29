@@ -6,7 +6,7 @@ import com.amplitude.core.events.Revenue
 import io.github.mkhytarmkhoian.herald.AnalyticsValue
 import io.github.mkhytarmkhoian.herald.Event
 import io.github.mkhytarmkhoian.herald.ScreenViewEvent
-import io.github.mkhytarmkhoian.herald.amplitude.RevenueEvent
+import io.github.mkhytarmkhoian.herald.amplitude.AmplitudeRevenueEvent
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
@@ -59,11 +59,11 @@ internal class AmplitudeTrackersTest {
 
     @Test
     fun `Revenue tracker should send through the revenue API, not as an event`() = runTest {
-        val event = object : RevenueEvent {
-            override val name = "purchase"
-            override val price = 4.99
-            override val currency = "EUR"
-        }
+        val event = AmplitudeRevenueEvent(
+            name = "purchase",
+            price = 4.99,
+            currency = "EUR",
+        )
 
         RevenueEventTracker(event, amplitude).track()
 
@@ -76,11 +76,11 @@ internal class AmplitudeTrackersTest {
 
     @Test
     fun `Revenue tracker should pass the insert id as an option, so a retried purchase counts once`() = runTest {
-        val event = object : RevenueEvent {
-            override val name = "purchase"
-            override val price = 4.99
-            override val insertId = "order-42"
-        }
+        val event = AmplitudeRevenueEvent(
+            name = "purchase",
+            price = 4.99,
+            insertId = "order-42",
+        )
 
         RevenueEventTracker(event, amplitude).track()
 

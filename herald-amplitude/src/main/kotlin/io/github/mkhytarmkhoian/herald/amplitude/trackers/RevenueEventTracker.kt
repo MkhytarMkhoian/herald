@@ -3,12 +3,12 @@ package io.github.mkhytarmkhoian.herald.amplitude.trackers
 import com.amplitude.android.Amplitude
 import com.amplitude.core.events.EventOptions
 import io.github.mkhytarmkhoian.herald.amplitude.AmplitudeEventTracker
-import io.github.mkhytarmkhoian.herald.amplitude.RevenueEvent
+import io.github.mkhytarmkhoian.herald.amplitude.AmplitudeRevenueEvent
 import io.github.mkhytarmkhoian.herald.amplitude.toAmplitudeRevenue
 
-/** Sends one [RevenueEvent] through Amplitude's revenue API. */
+/** Sends one [AmplitudeRevenueEvent] through Amplitude's revenue API. */
 public class RevenueEventTracker(
-    private val event: RevenueEvent,
+    private val event: AmplitudeRevenueEvent,
     private val amplitude: Amplitude,
 ) : AmplitudeEventTracker {
 

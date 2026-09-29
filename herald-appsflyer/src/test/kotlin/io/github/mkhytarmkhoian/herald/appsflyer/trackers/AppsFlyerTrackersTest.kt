@@ -6,9 +6,9 @@ import com.appsflyer.share.AFAdRevenueData
 import com.appsflyer.share.MediationNetwork
 import io.github.mkhytarmkhoian.herald.AnalyticsValue
 import io.github.mkhytarmkhoian.herald.Event
-import io.github.mkhytarmkhoian.herald.appsflyer.AdRevenueEvent
-import io.github.mkhytarmkhoian.herald.appsflyer.PurchaseEvent
-import io.github.mkhytarmkhoian.herald.appsflyer.SubscribeEvent
+import io.github.mkhytarmkhoian.herald.appsflyer.AppsFlyerAdRevenueEvent
+import io.github.mkhytarmkhoian.herald.appsflyer.AppsFlyerPurchaseEvent
+import io.github.mkhytarmkhoian.herald.appsflyer.AppsFlyerSubscribeEvent
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -39,11 +39,11 @@ internal class AppsFlyerTrackersTest {
 
     @Test
     fun `Purchase tracker should log af_purchase with the revenue under af_revenue`() = runTest {
-        val event = object : PurchaseEvent {
-            override val name = "checkout_completed"
-            override val revenue = 9.99
-            override val currency = "EUR"
-        }
+        val event = AppsFlyerPurchaseEvent(
+            name = "checkout_completed",
+            revenue = 9.99,
+            currency = "EUR",
+        )
 
         PurchaseEventTracker(event, appsFlyer, context).track()
 
@@ -53,11 +53,11 @@ internal class AppsFlyerTrackersTest {
 
     @Test
     fun `Subscribe tracker should log af_subscribe with the revenue under af_revenue`() = runTest {
-        val event = object : SubscribeEvent {
-            override val name = "subscription_started"
-            override val revenue = 4.99
-            override val currency = "USD"
-        }
+        val event = AppsFlyerSubscribeEvent(
+            name = "subscription_started",
+            revenue = 4.99,
+            currency = "USD",
+        )
 
         SubscribeEventTracker(event, appsFlyer, context).track()
 
@@ -66,14 +66,14 @@ internal class AppsFlyerTrackersTest {
 
     @Test
     fun `Ad revenue tracker should send through the ad revenue API, parameters as additional ones`() = runTest {
-        val event = object : AdRevenueEvent {
-            override val name = "ad_impression"
-            override val monetizationNetwork = "unity"
-            override val mediationNetwork = MediationNetwork.GOOGLE_ADMOB
-            override val revenue = 0.01
-            override val currency = "USD"
-            override val parameters = mapOf<String, AnalyticsValue>("format" to AnalyticsValue.String("rewarded"))
-        }
+        val event = AppsFlyerAdRevenueEvent(
+            name = "ad_impression",
+            monetizationNetwork = "unity",
+            mediationNetwork = MediationNetwork.GOOGLE_ADMOB,
+            revenue = 0.01,
+            currency = "USD",
+            parameters = mapOf<String, AnalyticsValue>("format" to AnalyticsValue.String("rewarded")),
+        )
 
         AdRevenueEventTracker(event, appsFlyer).track()
 

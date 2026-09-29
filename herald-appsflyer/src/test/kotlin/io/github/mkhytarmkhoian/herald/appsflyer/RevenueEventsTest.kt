@@ -6,21 +6,26 @@ import kotlin.test.assertEquals
 
 internal class RevenueEventsTest {
 
-    private class Purchase(
-        override val contentId: String? = null,
-        override val contentType: String? = null,
-        override val quantity: Int? = null,
-        override val orderId: String? = null,
-        override val parameters: Map<String, AnalyticsValue> = emptyMap(),
-    ) : PurchaseEvent {
-        override val name = "checkout_completed"
-        override val revenue = 9.99
-        override val currency = "EUR"
-    }
+    private fun purchase(
+        contentId: String? = null,
+        contentType: String? = null,
+        quantity: Int? = null,
+        orderId: String? = null,
+        parameters: Map<String, AnalyticsValue> = emptyMap(),
+    ) = AppsFlyerPurchaseEvent(
+        name = "checkout_completed",
+        revenue = 9.99,
+        currency = "EUR",
+        contentId = contentId,
+        contentType = contentType,
+        quantity = quantity,
+        orderId = orderId,
+        parameters = parameters,
+    )
 
     @Test
-    fun `On PurchaseEvent toAppsFlyerEventValues should carry every field under its af key`() {
-        val values = Purchase(
+    fun `On AppsFlyerPurchaseEvent toAppsFlyerEventValues should carry every field under its af key`() {
+        val values = purchase(
             contentId = "pro_monthly",
             contentType = "subscription_plan",
             quantity = 2,
@@ -43,28 +48,28 @@ internal class RevenueEventsTest {
     }
 
     @Test
-    fun `On PurchaseEvent toAppsFlyerEventValues an absent optional should be left out, not sent empty`() {
+    fun `On AppsFlyerPurchaseEvent toAppsFlyerEventValues an absent optional should be left out, not sent empty`() {
         assertEquals(
             mapOf<String, Any>("af_revenue" to 9.99, "af_currency" to "EUR"),
-            Purchase().toAppsFlyerEventValues(),
+            purchase().toAppsFlyerEventValues(),
         )
     }
 
     @Test
-    fun `On PurchaseEvent toAppsFlyerEventValues a typed field should win over a parameter of the same key`() {
-        val values = Purchase(parameters = mapOf("af_revenue" to AnalyticsValue.Double(1.0))).toAppsFlyerEventValues()
+    fun `On AppsFlyerPurchaseEvent toAppsFlyerEventValues a typed field should win over a parameter of the same key`() {
+        val values = purchase(parameters = mapOf("af_revenue" to AnalyticsValue.Double(1.0))).toAppsFlyerEventValues()
 
         assertEquals(9.99, values["af_revenue"])
     }
 
     @Test
-    fun `On SubscribeEvent toAppsFlyerEventValues should carry revenue and currency with the parameters`() {
-        val event = object : SubscribeEvent {
-            override val name = "subscription_started"
-            override val revenue = 4.99
-            override val currency = "USD"
-            override val parameters = mapOf<String, AnalyticsValue>("plan" to AnalyticsValue.String("pro"))
-        }
+    fun `On AppsFlyerSubscribeEvent toAppsFlyerEventValues should carry revenue and currency with the parameters`() {
+        val event = AppsFlyerSubscribeEvent(
+            name = "subscription_started",
+            revenue = 4.99,
+            currency = "USD",
+            parameters = mapOf<String, AnalyticsValue>("plan" to AnalyticsValue.String("pro")),
+        )
 
         assertEquals(
             mapOf<String, Any>("plan" to "pro", "af_revenue" to 4.99, "af_currency" to "USD"),

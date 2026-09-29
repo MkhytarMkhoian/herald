@@ -38,13 +38,13 @@ internal class AdjustEventTrackerTest {
     }
 
     @Test
-    fun `On toAdjustEvent a RevenueEvent should carry its revenue and currency`() {
-        val event = object : RevenueEvent {
-            override val name = "purchase_completed"
-            override val revenue = 9.99
-            override val currency = "USD"
-            override val parameters = mapOf<String, AnalyticsValue>("plan" to AnalyticsValue.String("pro"))
-        }
+    fun `On toAdjustEvent a AdjustRevenueEvent should carry its revenue and currency`() {
+        val event = AdjustRevenueEvent(
+            name = "purchase_completed",
+            revenue = 9.99,
+            currency = "USD",
+            parameters = mapOf<String, AnalyticsValue>("plan" to AnalyticsValue.String("pro")),
+        )
 
         val result = event.toAdjustEvent("abc123")
 
@@ -55,13 +55,13 @@ internal class AdjustEventTrackerTest {
     }
 
     @Test
-    fun `On toAdjustEvent a RevenueEvent with a deduplication id should carry it`() {
-        val event = object : RevenueEvent {
-            override val name = "purchase_completed"
-            override val revenue = 9.99
-            override val currency = "USD"
-            override val deduplicationId = "GPA.1234-5678-9012-34567"
-        }
+    fun `On toAdjustEvent a AdjustRevenueEvent with a deduplication id should carry it`() {
+        val event = AdjustRevenueEvent(
+            name = "purchase_completed",
+            revenue = 9.99,
+            currency = "USD",
+            deduplicationId = "GPA.1234-5678-9012-34567",
+        )
 
         val result = event.toAdjustEvent("abc123")
 
@@ -69,12 +69,12 @@ internal class AdjustEventTrackerTest {
     }
 
     @Test
-    fun `On toAdjustEvent a RevenueEvent without one should leave it unset`() {
-        val event = object : RevenueEvent {
-            override val name = "purchase_completed"
-            override val revenue = 9.99
-            override val currency = "USD"
-        }
+    fun `On toAdjustEvent a AdjustRevenueEvent without one should leave it unset`() {
+        val event = AdjustRevenueEvent(
+            name = "purchase_completed",
+            revenue = 9.99,
+            currency = "USD",
+        )
 
         assertNull(event.toAdjustEvent("abc123").deduplicationId)
     }
