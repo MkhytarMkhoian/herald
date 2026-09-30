@@ -2,7 +2,7 @@
 
 ## Version 1.1.0
 
-_Unreleased_
+_2026-09-30_
 
 This release adds two vendors, AppsFlyer and Amplitude, and changes how you send revenue to Adjust.
 Your events no longer implement a vendor's revenue type. Instead, the vendor's factory builds that

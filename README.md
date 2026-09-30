@@ -34,9 +34,9 @@ This repository is the **Android SDK**. The Flutter SDK is in development.
 
 ```kotlin
 dependencies {
-    implementation("io.github.mkhytarmkhoian:herald-core:1.0.0")
-    implementation("io.github.mkhytarmkhoian:herald-firebase:1.0.0") // one per vendor you use
-    testImplementation("io.github.mkhytarmkhoian:herald-testing:1.0.0")
+    implementation("io.github.mkhytarmkhoian:herald-core:1.1.0")
+    implementation("io.github.mkhytarmkhoian:herald-firebase:1.1.0") // one per vendor you use
+    testImplementation("io.github.mkhytarmkhoian:herald-testing:1.1.0")
 }
 ```
 
