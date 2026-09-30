@@ -14,8 +14,6 @@ Herald is an analytics library for mobile apps. Your app describes what happened
 Herald sends that event to every analytics service you use: Firebase, Adjust, Mixpanel, AppsFlyer,
 Amplitude, or one you build yourself.
 
-See the [project website](https://mkhytarmkhoian.github.io/herald/) for documentation and APIs.
-
 This repository is the **Android SDK**. The Flutter SDK is in development.
 
 - **Your features don't know which vendors you use.** A feature tracks its own event, like
@@ -97,7 +95,7 @@ val herald = Herald {
 
 ## Documentation
 
-The full documentation is at **[mkhytarmkhoian.github.io/herald](https://mkhytarmkhoian.github.io/herald/)**:
+The full documentation is on the [project website](https://mkhytarmkhoian.github.io/herald/):
 
 - [Android SDK](https://mkhytarmkhoian.github.io/herald/sdks/android/): install, modules and
   supported versions.
