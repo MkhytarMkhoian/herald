@@ -1,0 +1,4 @@
+# Pinned so a docs build is reproducible. Material for MkDocs is in maintenance mode (fixes through
+# May 2027); its successor Zensical has an official migration path when it leaves alpha.
+mkdocs==1.6.1
+mkdocs-material==9.7.7

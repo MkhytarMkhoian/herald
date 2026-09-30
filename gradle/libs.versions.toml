@@ -16,6 +16,10 @@ mixpanel = "8.11.0"
 appsflyer = "7.0.1"
 amplitude = "1.33.0"
 
+# docs-samples only: the DI examples on the website compile against these.
+koin = "4.2.2"
+hilt = "2.60.1"
+
 junit = "4.13.2"
 mockk = "1.14.11"
 robolectric = "4.16"
@@ -30,6 +34,7 @@ compose-material3 = { module = "androidx.compose.material3:material3", version =
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
@@ -38,6 +43,9 @@ adjust-android = { module = "com.adjust.sdk:adjust-android", version.ref = "adju
 mixpanel-android = { module = "com.mixpanel.android:mixpanel-android", version.ref = "mixpanel" }
 appsflyer-android = { module = "com.appsflyer:af-android-sdk", version.ref = "appsflyer" }
 amplitude-android = { module = "com.amplitude:analytics-android", version.ref = "amplitude" }
+
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

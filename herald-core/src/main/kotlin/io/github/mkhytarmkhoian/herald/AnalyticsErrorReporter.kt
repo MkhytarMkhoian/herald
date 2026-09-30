@@ -7,9 +7,9 @@ package io.github.mkhytarmkhoian.herald
  * vendor that fails on every call looks exactly like one that is working — so implement this over
  * whatever crash or logging tool you already use.
  *
- * [operation] says what was in flight and, for a track or a property, which one by name. It never
- * carries parameters, property values or the user id, so it is safe to forward whole to a crash
- * reporter.
+ * The [AnalyticsOperation] says what was in flight and, for a track or a property, which one by
+ * name. It never carries parameters, property values or the user id, so it is safe to forward
+ * whole to a crash reporter.
  */
 public fun interface AnalyticsErrorReporter {
     public fun onFailure(provider: String, operation: AnalyticsOperation, failure: Throwable)

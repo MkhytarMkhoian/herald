@@ -17,7 +17,7 @@ private const val DEFAULT_IDENTITY_PARAMETER = "user_id"
  *
  * ```kotlin
  * val config = AdjustConfig(application, appToken, AdjustConfig.ENVIRONMENT_PRODUCTION).apply {
- *     urlStrategy = AdjustConfig.DATA_RESIDENCY_EU
+ *     setUrlStrategy(listOf("eu.adjust.com"), true, true) // EU data residency
  *     setLogLevel(LogLevel.SUPPRESS)
  * }
  * AdjustAnalyticsService(adjust, config)

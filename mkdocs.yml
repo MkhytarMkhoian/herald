@@ -1,0 +1,136 @@
+# The Herald website. Built by scripts/build_docs.sh, which first generates the API reference and
+# copies CHANGELOG and CONTRIBUTING into docs/.
+site_name: Herald
+site_url: https://mkhytarmkhoian.github.io/herald/
+site_description: One analytics vocabulary, heard by every vendor — for Android, with Flutter in development.
+site_author: Mkhytar Mkhoian
+repo_name: MkhytarMkhoian/herald
+repo_url: https://github.com/MkhytarMkhoian/herald
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2026 Mkhytar Mkhoian — Apache License 2.0
+
+# Broken links and anchors fail `mkdocs build --strict`, which CI runs on every pull request.
+validation:
+  links:
+    anchors: warn
+
+theme:
+  name: material
+  font:
+    code: JetBrains Mono
+  logo: assets/logo-icon.svg
+  favicon: assets/logo-icon.svg
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - content.action.edit
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/MkhytarMkhoian/herald
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  # Code on the site comes from docs-samples, which `./gradlew build` compiles. A missing file or
+  # section fails the docs build rather than rendering an empty block.
+  - pymdownx.snippets:
+      base_path:
+        - docs-samples/src/main/kotlin
+        - docs-samples/src/test/kotlin
+      check_paths: true
+      dedent_subsections: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Quick start: getting-started/quick-start.md
+      - Set up your app: getting-started/app-setup.md
+  - Philosophy: philosophy.md
+  - Concepts:
+      - Events and properties: concepts/events-and-properties.md
+      - Capabilities: concepts/capabilities.md
+      - How Herald passes calls on: concepts/herald.md
+      - The factory chain: concepts/factory-chain.md
+  - Guides:
+      - Routing: guides/routing.md
+      - Modular apps: guides/modular-apps.md
+      - Consent: guides/consent.md
+      - Identity: guides/identity.md
+      - Revenue: guides/revenue.md
+      - Custom markers: guides/custom-markers.md
+      - Custom providers: guides/custom-provider.md
+      - Testing: guides/testing.md
+      - Migrating an app: guides/migrating.md
+  - Vendors:
+      - Firebase: vendors/firebase.md
+      - Adjust: vendors/adjust.md
+      - Mixpanel: vendors/mixpanel.md
+      - AppsFlyer: vendors/appsflyer.md
+      - Amplitude: vendors/amplitude.md
+      - Log: vendors/log.md
+  - SDKs:
+      - Android:
+          - Overview: sdks/android/index.md
+          - Compose: sdks/android/compose.md
+          - API reference: api/android/index.html
+      - Flutter: sdks/flutter/index.md
+  - Changelog:
+      - Android: changelog/android.md
+  - FAQ: faq.md
+  - Contributing: contributing.md

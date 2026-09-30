@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#3949AB"/>
+  <g transform="translate(100 160) scale(5)">
+    <rect width="64" height="64" rx="14" fill="#303F9F"/>
+    <rect x="10" y="12" width="33" height="4.5" rx="2.25" fill="#FFC107"/>
+    <rect x="7" y="10.5" width="4.5" height="7.5" rx="1.5" fill="#FFC107"/>
+    <path d="M42 10 L55 4.5 Q57.5 14.25 55 24 L42 18.5 Z" fill="#FFC107"/>
+    <path d="M14 16.5 H40 V52 L27 45 L14 52 Z" fill="#FFFFFF"/>
+    <rect x="20" y="24" width="4.5" height="17" fill="#3949AB"/>
+    <rect x="29.5" y="24" width="4.5" height="17" fill="#3949AB"/>
+    <rect x="20" y="30.5" width="14" height="4" fill="#3949AB"/>
+  </g>
+  <g font-family="-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" fill="#FFFFFF">
+    <text x="490" y="300" font-size="132" font-weight="700">Herald</text>
+    <text x="494" y="372" font-size="38" fill="#FFE082">One analytics vocabulary,</text>
+    <text x="494" y="418" font-size="38" fill="#FFE082">heard by every vendor.</text>
+    <text x="494" y="486" font-size="30" fill="#C5CAE9">Firebase · Adjust · Mixpanel · AppsFlyer · Amplitude</text>
+  </g>
+</svg>

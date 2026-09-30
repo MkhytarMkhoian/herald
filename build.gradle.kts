@@ -38,6 +38,7 @@
 // `apply false` is the fix.
 plugins {
     alias(libs.plugins.binary.compatibility.validator)
+    id("herald.docs")
 }
 
 // Modules the validator cannot see; see the note above. Listing them explicitly makes the gap a
@@ -57,10 +58,14 @@ val unvalidatedByDesign = setOf(
 val verifyApiValidationCoverage by tasks.registering {
     group = "verification"
     description = "Asserts which modules the binary-compatibility-validator actually covers."
+    // Only published modules have an API to keep; `docs-samples` and the like are not a contract.
+    val published = provider {
+        subprojects.filter { it.pluginManager.hasPlugin("herald.publish") }.map { it.name }.toSet()
+    }
     val validated = provider {
         subprojects.filter { it.tasks.findByName("apiCheck") != null }.map { it.name }.toSet()
     }
-    val expected = provider { subprojects.map { it.name }.toSet() - unvalidatedByDesign }
+    val expected = provider { published.get() - unvalidatedByDesign }
     doLast {
         val actual = validated.get()
         val want = expected.get()

@@ -1,0 +1,67 @@
+# Builds the website on every pull request and push to main, so a broken link, a missing snippet or
+# an example that no longer compiles fails before it merges. Deploys it to GitHub Pages only for a
+# release tag, so the site documents what Maven Central serves, or when run by hand for a docs-only
+# fix (see RELEASING.md).
+name: Docs
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v5
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+          cache: pip
+          cache-dependency-path: docs/requirements.txt
+
+      - run: pip install -r docs/requirements.txt
+
+      # On a tag, build as that version, as publish.yml does, so the API reference's source links
+      # point at the release.
+      - name: Build the site
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            export GRADLE_ARGS="-Pversion=${GITHUB_REF_NAME#v}"
+          fi
+          scripts/build_docs.sh
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

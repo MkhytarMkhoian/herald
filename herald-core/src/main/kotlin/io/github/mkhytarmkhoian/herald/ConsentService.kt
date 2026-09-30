@@ -5,9 +5,10 @@ package io.github.mkhytarmkhoian.herald
  *
  * One boolean, because that is the only consent signal every vendor implements.
  *
- * This does not cover collection *before* the first call. Only Adjust starts disabled; Firebase
- * needs `firebase_analytics_collection_enabled=false` in the manifest and Mixpanel needs
- * `MixpanelOptions.optOutTrackingDefault(true)` at construction, both outside Herald.
+ * This does not cover collection *before* the first call. The Adjust and AppsFlyer adapters start
+ * silent. Firebase needs `firebase_analytics_collection_enabled=false` in the manifest, Mixpanel
+ * needs `MixpanelOptions.optOutTrackingDefault(true)` and Amplitude `Configuration(optOut = true)`
+ * at construction, all outside Herald.
  */
 public interface ConsentService {
 

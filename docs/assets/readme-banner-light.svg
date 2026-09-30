@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <g transform="translate(0 25) scale(3.9)">
+    <rect width="64" height="64" rx="14" fill="#3949AB"/>
+    <rect x="10" y="12" width="33" height="4.5" rx="2.25" fill="#FFC107"/>
+    <rect x="7" y="10.5" width="4.5" height="7.5" rx="1.5" fill="#FFC107"/>
+    <path d="M42 10 L55 4.5 Q57.5 14.25 55 24 L42 18.5 Z" fill="#FFC107"/>
+    <path d="M14 16.5 H40 V52 L27 45 L14 52 Z" fill="#FFFFFF"/>
+    <rect x="20" y="24" width="4.5" height="17" fill="#3949AB"/>
+    <rect x="29.5" y="24" width="4.5" height="17" fill="#3949AB"/>
+    <rect x="20" y="30.5" width="14" height="4" fill="#3949AB"/>
+  </g>
+  <g font-family="-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif">
+    <text x="296" y="160" font-size="112" font-weight="700" fill="#1A237E">Herald</text>
+    <text x="300" y="226" font-size="36" fill="#3949AB">One analytics vocabulary, heard by every vendor.</text>
+  </g>
+</svg>

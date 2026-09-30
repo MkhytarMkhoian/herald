@@ -70,6 +70,23 @@ mavenPublishing {
     }
 }
 
+// The same Dokka output fills the javadoc jar on Central and the API reference on the website.
+// Each module describes itself in its Module.md; every symbol links to its source at the release
+// tag, so a reader lands on the code that shipped rather than on whatever `main` holds now.
+dokka {
+    dokkaSourceSets.configureEach {
+        includes.from("Module.md")
+        sourceLink {
+            localDirectory.set(file("src/main/kotlin"))
+            remoteUrl("https://github.com/MkhytarMkhoian/herald/tree/v${project.version}/${project.name}/src/main/kotlin")
+            remoteLineSuffix.set("#L")
+        }
+        externalDocumentationLinks.register("kotlinx.coroutines") {
+            url("https://kotlinlang.org/api/kotlinx.coroutines/")
+        }
+    }
+}
+
 // Evaluated when the Sign tasks run, by which point the task graph is known. PublishToMavenLocal
 // is not a PublishToMavenRepository, so only a remote publish makes a missing key an error.
 signing {
