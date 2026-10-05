@@ -2,7 +2,7 @@
 
 ## Version 1.2.0
 
-_Unreleased_
+_2026-10-05_
 
 This release makes Herald stricter about data that used to be dropped without a word, and removes
 two settings that duplicated what you already control elsewhere.
