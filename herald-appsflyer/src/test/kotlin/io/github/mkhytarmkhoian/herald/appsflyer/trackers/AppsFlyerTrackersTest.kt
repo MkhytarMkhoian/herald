@@ -9,11 +9,13 @@ import io.github.mkhytarmkhoian.herald.Event
 import io.github.mkhytarmkhoian.herald.appsflyer.AppsFlyerAdRevenueEvent
 import io.github.mkhytarmkhoian.herald.appsflyer.AppsFlyerPurchaseEvent
 import io.github.mkhytarmkhoian.herald.appsflyer.AppsFlyerSubscribeEvent
+import io.mockk.Called
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import kotlin.test.assertFailsWith
 
 internal class AppsFlyerTrackersTest {
 
@@ -49,6 +51,19 @@ internal class AppsFlyerTrackersTest {
 
         verify { appsFlyer.logEvent(context, "af_purchase", mapOf("af_revenue" to 9.99, "af_currency" to "EUR")) }
         verify(inverse = true) { appsFlyer.logEvent(any(), "checkout_completed", any()) }
+    }
+
+    @Test
+    fun `Purchase tracker with a clashing parameter should throw and log nothing`() = runTest {
+        val event = AppsFlyerPurchaseEvent(
+            name = "checkout_completed",
+            revenue = 9.99,
+            currency = "EUR",
+            parameters = mapOf("af_currency" to AnalyticsValue.String("USD")),
+        )
+
+        assertFailsWith<IllegalArgumentException> { PurchaseEventTracker(event, appsFlyer, context).track() }
+        verify { appsFlyer wasNot Called }
     }
 
     @Test

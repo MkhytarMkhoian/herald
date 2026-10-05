@@ -22,17 +22,20 @@ public data class AppsFlyerSubscribeEvent(
     /** `af_currency`, an ISO 4217 code. */
     public val currency: String,
 
-    /** Sent alongside the predefined values. Usually the app event's own. */
+    /** Sent alongside the predefined values; don't use their keys. Usually the app event's own. */
     override val parameters: Map<String, AnalyticsValue> = emptyMap(),
 ) : Event
 
 /**
  * The event values for `af_subscribe`: [AppsFlyerSubscribeEvent.parameters], then the predefined
- * ones, which win on a clash. Public because a custom [AppsFlyerEventTracker] almost always
- * needs it.
+ * ones. Public because a custom [AppsFlyerEventTracker] almost always needs it.
+ *
+ * Throws an [IllegalArgumentException] if a parameter has a key the subscription sets itself.
  */
 public fun AppsFlyerSubscribeEvent.toAppsFlyerEventValues(): Map<String, Any> =
-    parameters.toAppsFlyerEventValues() + mapOf(
-        AFInAppEventParameterName.REVENUE to revenue,
-        AFInAppEventParameterName.CURRENCY to currency,
+    withParameters(
+        mapOf(
+            AFInAppEventParameterName.REVENUE to revenue,
+            AFInAppEventParameterName.CURRENCY to currency,
+        ),
     )

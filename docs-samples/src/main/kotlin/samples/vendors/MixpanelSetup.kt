@@ -32,7 +32,7 @@ fun mixpanelProvider(context: Context, projectToken: String): Herald.Provider {
             GenericMixpanelPropertySetterFactory(mixpanel),      // super properties
         ),
     )
-    val service = MixpanelAnalyticsService(mixpanel, loggingEnabled = false, identificationEnabled = true)
+    val service = MixpanelAnalyticsService(mixpanel)
 
     val provider = Herald.Provider(
         name = "mixpanel",

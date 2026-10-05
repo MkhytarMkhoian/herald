@@ -49,7 +49,7 @@ fun firebaseProvider(firebaseAnalytics: FirebaseAnalytics): Herald.Provider {
             GenericFirebasePropertySetterFactory(firebaseAnalytics),
         ),
     )
-    val service = FirebaseAnalyticsService(firebaseAnalytics, identificationEnabled = true)
+    val service = FirebaseAnalyticsService(firebaseAnalytics)
     return Herald.Provider(
         name = "firebase",
         events = tracker,
@@ -72,7 +72,7 @@ fun mixpanelProvider(mixpanel: MixpanelAPI): Herald.Provider {
             GenericMixpanelPropertySetterFactory(mixpanel),
         ),
     )
-    val service = MixpanelAnalyticsService(mixpanel, loggingEnabled = false, identificationEnabled = true)
+    val service = MixpanelAnalyticsService(mixpanel)
     return Herald.Provider(
         name = "mixpanel",
         events = tracker,

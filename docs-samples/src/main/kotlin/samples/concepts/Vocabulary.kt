@@ -27,8 +27,7 @@ data class PlanSelected(val plan: String, val seats: Int, val price: Double, val
 
 // --8<-- [start:screen-view]
 data class ProductScreenViewed(val productId: String) : ScreenViewEvent {
-    override val name = "product_viewed"         // what vendors without a reserved screen view see
-    override val screenName = "Product"          // GA4's screen_name, Amplitude's screen name
+    override val name = "product" // the screen's name in GA4, Mixpanel and Amplitude
     override val parameters = parameters { put("product_id", productId) }
 }
 // --8<-- [end:screen-view]

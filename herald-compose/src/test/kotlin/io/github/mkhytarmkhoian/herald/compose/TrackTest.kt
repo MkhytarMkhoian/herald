@@ -29,8 +29,7 @@ class TrackTest {
     private val analytics = FakeAnalyticsProvider()
 
     private object HomeShown : ScreenViewEvent {
-        override val name = "home_shown"
-        override val screenName = "Home"
+        override val name = "Home"
     }
 
     private object BannerClicked : Event {
@@ -46,7 +45,7 @@ class TrackTest {
         }
         compose.waitForIdle()
 
-        analytics.assertTracked("home_shown")
+        analytics.assertTracked("Home")
         analytics.assertNothingElseTracked()
     }
 

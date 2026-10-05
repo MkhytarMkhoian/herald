@@ -17,8 +17,7 @@ internal class FirebaseAnalyticsServiceTest {
 
     private val firebaseAnalytics: FirebaseAnalytics = mockk(relaxed = true)
 
-    private fun service(identificationEnabled: Boolean = true) =
-        FirebaseAnalyticsService(firebaseAnalytics, identificationEnabled = identificationEnabled)
+    private fun service() = FirebaseAnalyticsService(firebaseAnalytics)
 
     @Test
     fun `On start should not interact with firebase`() = runTest {
@@ -57,19 +56,5 @@ internal class FirebaseAnalyticsServiceTest {
 
         verify { firebaseAnalytics.setUserId(null) }
         confirmVerified(firebaseAnalytics)
-    }
-
-    @Test
-    fun `On identify with identification disabled should not touch firebase`() = runTest {
-        service(identificationEnabled = false).identify(Identity(USER_ID))
-
-        verify { firebaseAnalytics wasNot Called }
-    }
-
-    @Test
-    fun `On reset with identification disabled should not touch firebase`() = runTest {
-        service(identificationEnabled = false).reset()
-
-        verify { firebaseAnalytics wasNot Called }
     }
 }

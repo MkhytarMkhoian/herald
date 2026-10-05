@@ -3,6 +3,7 @@ package io.github.mkhytarmkhoian.herald.appsflyer
 import io.github.mkhytarmkhoian.herald.AnalyticsValue
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 internal class RevenueEventsTest {
 
@@ -56,10 +57,30 @@ internal class RevenueEventsTest {
     }
 
     @Test
-    fun `On AppsFlyerPurchaseEvent toAppsFlyerEventValues a typed field should win over a parameter of the same key`() {
-        val values = purchase(parameters = mapOf("af_revenue" to AnalyticsValue.Double(1.0))).toAppsFlyerEventValues()
+    fun `On AppsFlyerPurchaseEvent toAppsFlyerEventValues a parameter with a key it sets should be refused`() {
+        val event = purchase(parameters = mapOf("af_revenue" to AnalyticsValue.Double(1.0)))
 
-        assertEquals(9.99, values["af_revenue"])
+        assertFailsWith<IllegalArgumentException> { event.toAppsFlyerEventValues() }
+    }
+
+    @Test
+    fun `On AppsFlyerPurchaseEvent toAppsFlyerEventValues a key it leaves empty should be free for a parameter`() {
+        val values = purchase(parameters = mapOf("af_order_id" to AnalyticsValue.String("order-1")))
+            .toAppsFlyerEventValues()
+
+        assertEquals("order-1", values["af_order_id"])
+    }
+
+    @Test
+    fun `On AppsFlyerSubscribeEvent toAppsFlyerEventValues a parameter with a key it sets should be refused`() {
+        val event = AppsFlyerSubscribeEvent(
+            name = "subscription_started",
+            revenue = 4.99,
+            currency = "USD",
+            parameters = mapOf<String, AnalyticsValue>("af_currency" to AnalyticsValue.String("EUR")),
+        )
+
+        assertFailsWith<IllegalArgumentException> { event.toAppsFlyerEventValues() }
     }
 
     @Test

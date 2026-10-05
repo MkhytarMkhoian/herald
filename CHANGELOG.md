@@ -1,5 +1,27 @@
 # Change Log
 
+## Version 1.2.0
+
+_Unreleased_
+
+This release makes Herald stricter about data that used to be dropped without a word, and removes
+two settings that duplicated what you already control elsewhere.
+
+ * Breaking: `ScreenViewEvent` no longer has `screenName`. A screen view's `name` is the screen's
+   name, and every vendor sends it as the screen name. To show a different name in one vendor's
+   screen reports, put a factory for that event before the vendor's screen-view factory.
+ * Breaking: A screen view with its own screen-name parameter (`screen_name` for Firebase and
+   Mixpanel, `[Amplitude] Screen Name` for Amplitude) is refused with an
+   `IllegalArgumentException`, reported to your error reporter, instead of having that parameter
+   silently replaced.
+ * Breaking: `AppsFlyerPurchaseEvent` and `AppsFlyerSubscribeEvent` refuse a parameter whose key
+   they set themselves, such as `af_revenue`, instead of silently replacing it.
+ * Breaking: `FirebaseAnalyticsService` and `MixpanelAnalyticsService` no longer take
+   `identificationEnabled`. To keep the user id away from a vendor, register its provider without
+   `identity`.
+ * Breaking: `MixpanelAnalyticsService` no longer takes `loggingEnabled`. Set Mixpanel's logging on
+   the `MixpanelAPI` with `setEnableLogging`, as Mixpanel's docs describe.
+
 ## Version 1.1.0
 
 _2026-09-30_

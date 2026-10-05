@@ -39,8 +39,7 @@ class LogTrackerTest {
     @Test
     fun `A screen view prints the screen name, and its parameters too`() = runTest {
         val event = object : ScreenViewEvent {
-            override val name = "checkout_opened"
-            override val screenName = "CheckoutScreen"
+            override val name = "CheckoutScreen"
             override val parameters = parameters { put("source", "cart") }
         }
 

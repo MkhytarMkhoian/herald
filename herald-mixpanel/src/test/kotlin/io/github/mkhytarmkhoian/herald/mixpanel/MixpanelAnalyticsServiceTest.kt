@@ -2,6 +2,7 @@ package io.github.mkhytarmkhoian.herald.mixpanel
 
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import io.github.mkhytarmkhoian.herald.Identity
+import io.mockk.Called
 import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.unmockkStatic
@@ -19,21 +20,11 @@ class MixpanelAnalyticsServiceTest {
 
     private val mixpanel: MixpanelAPI = mockk(relaxed = true)
 
-    private fun createMixpanelAnalyticsService(
-        loggingEnabled: Boolean = false,
-        identificationEnabled: Boolean = true
-    ): MixpanelAnalyticsService {
-        return MixpanelAnalyticsService(
-            mixpanel = mixpanel,
-            loggingEnabled = loggingEnabled,
-            identificationEnabled = identificationEnabled
-        )
-    }
+    private fun createMixpanelAnalyticsService() = MixpanelAnalyticsService(mixpanel)
 
     @Before
     fun setup() {
         mockkStatic(MixpanelAPI::flush)
-        mockkStatic(MixpanelAPI::setEnableLogging)
         mockkStatic(MixpanelAPI::optOutTracking)
         mockkStatic(MixpanelAPI::reset)
     }
@@ -41,27 +32,17 @@ class MixpanelAnalyticsServiceTest {
     @After
     fun tearDown() {
         unmockkStatic(MixpanelAPI::flush)
-        unmockkStatic(MixpanelAPI::setEnableLogging)
         unmockkStatic(MixpanelAPI::optOutTracking)
         unmockkStatic(MixpanelAPI::reset)
     }
 
     @Test
-    fun `On start should apply the logging setting`() = runTest {
+    fun `On start should not touch mixpanel, whose settings the consumer owns`() = runTest {
         val service = createMixpanelAnalyticsService()
 
         service.start()
 
-        verify { mixpanel.setEnableLogging(false) }
-    }
-
-    @Test
-    fun `On start should not touch the server URL, which the consumer owns`() = runTest {
-        val service = createMixpanelAnalyticsService()
-
-        service.start()
-
-        verify(inverse = true) { mixpanel.setServerURL(any()) }
+        verify { mixpanel wasNot Called }
     }
 
     @Test
@@ -103,26 +84,5 @@ class MixpanelAnalyticsServiceTest {
         service.identify(identity)
 
         verify { mixpanel.identify(identity.userId, true) }
-    }
-
-    @Test
-    fun `On invoke reset shouldn't call proper mixpanel method`() = runTest {
-        val service = createMixpanelAnalyticsService(identificationEnabled = false)
-
-        service.reset()
-
-        verify(inverse = true) { mixpanel.reset() }
-    }
-
-    @Test
-    fun `On invoke identify shouldn't call proper mixpanel method`() = runTest {
-        val service = createMixpanelAnalyticsService(identificationEnabled = false)
-
-        val userId = USER_ID
-        val identity = Identity(userId)
-
-        service.identify(identity)
-
-        verify(inverse = true) { mixpanel.identify(identity.userId, true) }
     }
 }

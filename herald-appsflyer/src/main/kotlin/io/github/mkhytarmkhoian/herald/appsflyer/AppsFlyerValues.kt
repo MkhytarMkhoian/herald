@@ -1,6 +1,7 @@
 package io.github.mkhytarmkhoian.herald.appsflyer
 
 import io.github.mkhytarmkhoian.herald.AnalyticsValue
+import io.github.mkhytarmkhoian.herald.Event
 
 /**
  * The value as AppsFlyer should receive it. AppsFlyer event values are JSON, so numbers and
@@ -20,3 +21,12 @@ public val AnalyticsValue.asAppsFlyerValue: Any
 /** Event parameters as AppsFlyer event values; see [asAppsFlyerValue]. */
 public fun Map<String, AnalyticsValue>.toAppsFlyerEventValues(): Map<String, Any> =
     mapValues { (_, parameter) -> parameter.asAppsFlyerValue }
+
+/** The event's parameters followed by [values], refusing a parameter that [values] would replace. */
+internal fun Event.withParameters(values: Map<String, Any>): Map<String, Any> {
+    val clash = parameters.keys.firstOrNull { it in values }
+    require(clash == null) {
+        "AppsFlyer event '$name' can't have a '$clash' parameter: it sets that key itself"
+    }
+    return parameters.toAppsFlyerEventValues() + values
+}

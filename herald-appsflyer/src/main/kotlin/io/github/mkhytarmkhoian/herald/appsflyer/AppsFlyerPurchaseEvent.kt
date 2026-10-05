@@ -34,21 +34,25 @@ public data class AppsFlyerPurchaseEvent(
     /** `af_order_id`. */
     public val orderId: String? = null,
 
-    /** Sent alongside the predefined values. Usually the app event's own. */
+    /** Sent alongside the predefined values; don't use their keys. Usually the app event's own. */
     override val parameters: Map<String, AnalyticsValue> = emptyMap(),
 ) : Event
 
 /**
  * The event values for `af_purchase`: [AppsFlyerPurchaseEvent.parameters], then the predefined
- * ones, which win on a clash. An absent optional is left out rather than sent empty. Public
- * because a custom [AppsFlyerEventTracker] almost always needs it.
+ * ones. An absent optional is left out rather than sent empty. Public because a custom
+ * [AppsFlyerEventTracker] almost always needs it.
+ *
+ * Throws an [IllegalArgumentException] if a parameter has a key the purchase sets itself.
  */
 public fun AppsFlyerPurchaseEvent.toAppsFlyerEventValues(): Map<String, Any> =
-    parameters.toAppsFlyerEventValues() + listOfNotNull(
-        AFInAppEventParameterName.REVENUE to revenue,
-        AFInAppEventParameterName.CURRENCY to currency,
-        contentId?.let { AFInAppEventParameterName.CONTENT_ID to it },
-        contentType?.let { AFInAppEventParameterName.CONTENT_TYPE to it },
-        quantity?.let { AFInAppEventParameterName.QUANTITY to it },
-        orderId?.let { AFInAppEventParameterName.ORDER_ID to it },
+    withParameters(
+        listOfNotNull(
+            AFInAppEventParameterName.REVENUE to revenue,
+            AFInAppEventParameterName.CURRENCY to currency,
+            contentId?.let { AFInAppEventParameterName.CONTENT_ID to it },
+            contentType?.let { AFInAppEventParameterName.CONTENT_TYPE to it },
+            quantity?.let { AFInAppEventParameterName.QUANTITY to it },
+            orderId?.let { AFInAppEventParameterName.ORDER_ID to it },
+        ).toMap(),
     )

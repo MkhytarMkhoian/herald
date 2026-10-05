@@ -23,15 +23,16 @@ import io.github.mkhytarmkhoian.herald.Identity
  * ```
  *
  * [setEnabled] then opts in, and the state persists across launches.
+ *
+ * Mixpanel's logging is set on the [MixpanelAPI] too, with `setEnableLogging`. To keep the user id
+ * away from Mixpanel, register the provider without `identity`.
  */
 public class MixpanelAnalyticsService(
     private val mixpanel: MixpanelAPI,
-    private val loggingEnabled: Boolean,
-    private val identificationEnabled: Boolean
 ) : AnalyticsLifecycleService, IdentifiableUserService, ConsentService {
 
     override suspend fun start() {
-        mixpanel.setEnableLogging(loggingEnabled)
+        // Mixpanel starts itself when the MixpanelAPI is created.
     }
 
     override suspend fun flush() {
@@ -48,14 +49,10 @@ public class MixpanelAnalyticsService(
     }
 
     override suspend fun identify(identity: Identity) {
-        if (identificationEnabled) {
-            mixpanel.identify(identity.userId, true)
-        }
+        mixpanel.identify(identity.userId, true)
     }
 
     override suspend fun reset() {
-        if (identificationEnabled) {
-            mixpanel.reset()
-        }
+        mixpanel.reset()
     }
 }

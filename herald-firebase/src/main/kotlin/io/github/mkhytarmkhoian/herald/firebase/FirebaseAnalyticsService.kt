@@ -18,10 +18,11 @@ import com.google.firebase.analytics.FirebaseAnalytics
  *
  * Set that flag if you need a fresh install to collect nothing until the user has answered.
  * [setEnabled] then flips collection on, and Firebase persists the choice across launches.
+ *
+ * To keep the user id away from Firebase, register the provider without `identity`.
  */
 public class FirebaseAnalyticsService(
     private val firebaseAnalytics: FirebaseAnalytics,
-    private val identificationEnabled: Boolean
 ) : AnalyticsLifecycleService, IdentifiableUserService, ConsentService {
 
     override suspend fun start() {
@@ -33,14 +34,10 @@ public class FirebaseAnalyticsService(
     }
 
     override suspend fun identify(identity: Identity) {
-        if (identificationEnabled) {
-            firebaseAnalytics.setUserId(identity.userId)
-        }
+        firebaseAnalytics.setUserId(identity.userId)
     }
 
     override suspend fun reset() {
-        if (identificationEnabled) {
-            firebaseAnalytics.setUserId(null)
-        }
+        firebaseAnalytics.setUserId(null)
     }
 }

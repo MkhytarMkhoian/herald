@@ -39,7 +39,7 @@ val firebaseAnalyticsModule = module {
             ),
             CompositeFirebasePropertySetterFactory(GenericFirebasePropertySetterFactory(firebaseAnalytics)),
         )
-        val service = FirebaseAnalyticsService(firebaseAnalytics, identificationEnabled = true)
+        val service = FirebaseAnalyticsService(firebaseAnalytics)
         Herald.Provider("firebase", tracker, tracker, service, service, service)
     }
 }

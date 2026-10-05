@@ -3,9 +3,11 @@ package io.github.mkhytarmkhoian.herald.mixpanel.trackers
 import com.mixpanel.android.mpmetrics.MixpanelAPI
 import io.github.mkhytarmkhoian.herald.AnalyticsValue
 import io.github.mkhytarmkhoian.herald.ScreenViewEvent
+import io.mockk.Called
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlin.test.assertFailsWith
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
@@ -18,7 +20,7 @@ class ScreenViewEventTrackerTest {
     }
 
     private val event: ScreenViewEvent = mockk {
-        every { screenName } returns SCREEN
+        every { name } returns SCREEN
         every { parameters } returns mapOf(CUSTOM_PARAM to AnalyticsValue.String(CUSTOM_PARAM_VALUE))
     }
 
@@ -36,5 +38,18 @@ class ScreenViewEventTrackerTest {
         screenViewEventTracker.track()
 
         verify { mixpanel.trackMap("screen_view", properties) }
+    }
+
+    @Test
+    fun `On track with its own screen_name parameter should throw and track nothing`() = runTest {
+        val clashing: ScreenViewEvent = mockk {
+            every { name } returns SCREEN
+            every { parameters } returns mapOf("screen_name" to AnalyticsValue.String("Other"))
+        }
+
+        assertFailsWith<IllegalArgumentException> {
+            ScreenViewEventTracker(clashing, mixpanel).track()
+        }
+        verify { mixpanel wasNot Called }
     }
 }

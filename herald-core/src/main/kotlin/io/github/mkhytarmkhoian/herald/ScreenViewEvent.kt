@@ -1,11 +1,9 @@
 package io.github.mkhytarmkhoian.herald
 
 /**
- * A screen becoming visible.
+ * A screen becoming visible. Its [name] is the screen's name.
  *
- * [screenName] is separate from [Event.name]: vendors model a screen view as a reserved event
- * whose parameter is the screen name, so the two hold different values.
+ * Vendors with a screen-view event of their own send it that way. To show a different name in one
+ * vendor's screen reports, put a factory for that event before the vendor's screen-view factory.
  */
-public interface ScreenViewEvent : Event {
-    public val screenName: String
-}
+public interface ScreenViewEvent : Event

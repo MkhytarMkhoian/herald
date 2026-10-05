@@ -10,13 +10,24 @@ import io.github.mkhytarmkhoian.herald.mixpanel.toMixpanelProperties
 private const val SCREEN_VIEW = "screen_view"
 private const val SCREEN_NAME = "screen_name"
 
+/**
+ * Tracks [event] as a `screen_view` event, with its name as `screen_name`: the names GA4 uses, since
+ * Mixpanel has none of its own.
+ *
+ * Throws an [IllegalArgumentException] if the event has its own `screen_name` parameter, because it
+ * would replace the screen's name.
+ */
 public class ScreenViewEventTracker(
     private val event: ScreenViewEvent,
     private val mixpanel: MixpanelAPI,
 ) : MixpanelEventTracker {
 
     override suspend fun track() {
-        val params = event.parameters.toMixpanelProperties() + (SCREEN_NAME to event.screenName)
+        require(SCREEN_NAME !in event.parameters) {
+            "Screen view '${event.name}' can't have a '$SCREEN_NAME' parameter: " +
+                "it holds the screen's name"
+        }
+        val params = event.parameters.toMixpanelProperties() + (SCREEN_NAME to event.name)
         mixpanel.trackMap(SCREEN_VIEW, params)
     }
 }

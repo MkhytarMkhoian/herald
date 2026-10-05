@@ -7,6 +7,7 @@ import io.github.mkhytarmkhoian.herald.AnalyticsValue
 import io.github.mkhytarmkhoian.herald.Event
 import io.github.mkhytarmkhoian.herald.ScreenViewEvent
 import io.github.mkhytarmkhoian.herald.amplitude.AmplitudeRevenueEvent
+import io.mockk.Called
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
@@ -14,6 +15,7 @@ import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 internal class AmplitudeTrackersTest {
@@ -43,7 +45,7 @@ internal class AmplitudeTrackersTest {
     @Test
     fun `Screen view tracker should use Amplitude's reserved screen view names`() = runTest {
         val event: ScreenViewEvent = mockk {
-            every { screenName } returns "Checkout"
+            every { name } returns "Checkout"
             every { parameters } returns mapOf("plan" to AnalyticsValue.String("pro"))
         }
 
@@ -55,6 +57,17 @@ internal class AmplitudeTrackersTest {
                 mapOf("plan" to "pro", "[Amplitude] Screen Name" to "Checkout"),
             )
         }
+    }
+
+    @Test
+    fun `Screen view tracker should refuse its own screen name parameter and track nothing`() = runTest {
+        val event: ScreenViewEvent = mockk {
+            every { name } returns "Checkout"
+            every { parameters } returns mapOf("[Amplitude] Screen Name" to AnalyticsValue.String("Other"))
+        }
+
+        assertFailsWith<IllegalArgumentException> { ScreenViewEventTracker(event, amplitude).track() }
+        verify { amplitude wasNot Called }
     }
 
     @Test

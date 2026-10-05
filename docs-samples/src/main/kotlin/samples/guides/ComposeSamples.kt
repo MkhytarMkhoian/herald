@@ -21,8 +21,7 @@ import io.github.mkhytarmkhoian.herald.parameters
 import kotlin.time.Duration.Companion.seconds
 
 data class MovieDetailsViewed(val movieId: Long) : ScreenViewEvent {
-    override val name = "movie_details_viewed"
-    override val screenName = "MovieDetails"
+    override val name = "MovieDetails"
     override val parameters = parameters { put("movie_id", movieId) }
 }
 

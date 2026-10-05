@@ -299,7 +299,6 @@ public final class io/github/mkhytarmkhoian/herald/Resolution$Dropped : io/githu
 }
 
 public abstract interface class io/github/mkhytarmkhoian/herald/ScreenViewEvent : io/github/mkhytarmkhoian/herald/Event {
-	public abstract fun getScreenName ()Ljava/lang/String;
 }
 
 public final class io/github/mkhytarmkhoian/herald/ScreenViewEvent$DefaultImpls {
