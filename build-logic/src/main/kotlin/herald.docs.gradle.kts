@@ -2,7 +2,7 @@
  * The API reference for the website — applied to the root project only.
  *
  * Aggregates the Dokka output of every published module into one HTML publication at
- * `build/dokka/html`, which `scripts/build_docs.sh` places under the site's `api/`. A module joins
+ * `build/dokka/html`, which herald-docs' build places under the site's `api/`. A module joins
  * by applying `herald.publish`; nothing is listed by hand, so a new adapter cannot be left out.
  */
 plugins {

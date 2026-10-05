@@ -10,5 +10,5 @@ dependency.
   each call to every provider registered with it.
 - Vendor adapters dispatch through chains of partial factories that answer with a `Resolution`.
 
-Start with the [Android SDK page](https://mkhytarmkhoian.github.io/herald/sdks/android/) and the
-[concepts](https://mkhytarmkhoian.github.io/herald/concepts/events-and-properties/).
+Start with the [Android SDK page](https://mkhytarmkhoian.github.io/herald-docs/sdks/android/) and
+the [concepts](https://mkhytarmkhoian.github.io/herald-docs/concepts/events-and-properties/).

@@ -2,10 +2,13 @@
 # its `v`, overriding the -SNAPSHOT in gradle.properties, so a release never depends on remembering
 # to edit that file first.
 #
-# Needs four repository secrets, from the accounts only the owner holds:
+# Then it asks herald-docs to redeploy the website with this release.
+#
+# Needs five repository secrets, from the accounts only the owner holds:
 #   MAVEN_CENTRAL_USERNAME / MAVEN_CENTRAL_PASSWORD — a Central Portal user token
 #   SIGNING_KEY                                     — ASCII-armored GPG private key
 #   SIGNING_KEY_PASSWORD                            — its passphrase
+#   DOCS_DISPATCH_TOKEN                             — a token that starts herald-docs' workflows
 name: Publish
 
 on:
@@ -32,3 +35,8 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run: ./gradlew publishAndReleaseToMavenCentral -Pversion=${GITHUB_REF_NAME#v}
+
+      - name: Redeploy the website
+        env:
+          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+        run: gh api repos/MkhytarMkhoian/herald-docs/dispatches -f event_type=sdk-release

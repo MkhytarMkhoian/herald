@@ -4,4 +4,4 @@
 assertions over what was recorded. Register it with a real `Herald` in tests, so they exercise the
 same setup you ship.
 
-See [Testing](https://mkhytarmkhoian.github.io/herald/guides/testing/).
+See [Testing](https://mkhytarmkhoian.github.io/herald-docs/guides/testing/).

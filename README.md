@@ -8,7 +8,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mkhytarmkhoian/herald-core)](https://central.sonatype.com/namespace/io.github.mkhytarmkhoian)
 [![CI](https://github.com/MkhytarMkhoian/herald/actions/workflows/ci.yml/badge.svg)](https://github.com/MkhytarMkhoian/herald/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Docs](https://img.shields.io/badge/docs-website-indigo.svg)](https://mkhytarmkhoian.github.io/herald/)
+[![Docs](https://img.shields.io/badge/docs-website-indigo.svg)](https://mkhytarmkhoian.github.io/herald-docs/)
 
 Herald is an analytics library for mobile apps. Your app describes what happened as an event, and
 Herald sends that event to every analytics service you use: Firebase, Adjust, Mixpanel, AppsFlyer,
@@ -95,19 +95,19 @@ val herald = Herald {
 
 ## Documentation
 
-The full documentation is on the [project website](https://mkhytarmkhoian.github.io/herald/):
+The full documentation is on the [project website](https://mkhytarmkhoian.github.io/herald-docs/):
 
-- [Android SDK](https://mkhytarmkhoian.github.io/herald/sdks/android/): install, modules and
-  supported versions.
-- [Getting started](https://mkhytarmkhoian.github.io/herald/getting-started/quick-start/): send
-  your first event, then set Herald up for a real app.
-- [Philosophy](https://mkhytarmkhoian.github.io/herald/philosophy/): why Herald works the way it
-  does.
-- [Guides](https://mkhytarmkhoian.github.io/herald/guides/routing/): routing, feature modules,
-  consent, identity, revenue and testing.
-- [Vendors](https://mkhytarmkhoian.github.io/herald/vendors/firebase/): what each vendor receives,
-  and what to watch out for.
-- [API reference](https://mkhytarmkhoian.github.io/herald/api/android/).
+- [Android SDK](https://mkhytarmkhoian.github.io/herald-docs/sdks/android/): install, modules
+  and supported versions.
+- [Getting started](https://mkhytarmkhoian.github.io/herald-docs/getting-started/quick-start/):
+  send your first event, then set Herald up for a real app.
+- [Philosophy](https://mkhytarmkhoian.github.io/herald-docs/philosophy/): why Herald works the
+  way it does.
+- [Guides](https://mkhytarmkhoian.github.io/herald-docs/guides/routing/): routing, feature
+  modules, consent, identity, revenue and testing.
+- [Vendors](https://mkhytarmkhoian.github.io/herald-docs/vendors/firebase/): what each vendor
+  receives, and what to watch out for.
+- [API reference](https://mkhytarmkhoian.github.io/herald-docs/api/android/).
 
 [Moove](https://github.com/MkhytarMkhoian/Moove) is a sample app that uses every module, including
 feature modules, consent, sign-in, Compose and a screen that shows every event it sent.

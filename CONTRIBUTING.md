@@ -36,8 +36,11 @@ good place to see your change working.
 - **A careful public API.** Every module compiles in explicit API mode, so nothing is public unless
   you write `public`. Anything public is part of Herald's API and can only change incompatibly in a
   major version.
-- **Documentation, when users would notice.** Update the matching page in `docs/`, and its example
-  in `docs-samples`, which the build compiles. Write in plain, simple words.
+- **Documentation, when users would notice.** Update the example in `docs-samples`, which the
+  build compiles, and the matching page in
+  [herald-docs](https://github.com/MkhytarMkhoian/herald-docs), which shows each `// --8<--`
+  section by name. Keep those names, or rename them on the website in step. Write in plain, simple
+  words.
 - **A line in `CHANGELOG.md`** under the next, unreleased version, starting with `New:`, `Fix:`,
   `Upgrade:` or `Breaking:`.
 
@@ -75,9 +78,10 @@ vendor stays in its module; a new vendor never needs a change to `herald-core`.
 - [ ] **Everywhere the module is listed:**
     - [ ] `unvalidatedByDesign` in the root `build.gradle.kts`;
     - [ ] a `Module.md` of its own, for the API reference;
-    - [ ] a vendor page under `docs/vendors/`, and in the `mkdocs.yml` navigation;
+    - [ ] in herald-docs: a vendor page under `docs/vendors/`, in the `mkdocs.yml` navigation;
     - [ ] the modules table in `README.md`;
-    - [ ] the modules table and both install lists on `docs/sdks/android/index.md`;
+    - [ ] in herald-docs: the modules table and both install lists on
+          `docs/sdks/android/index.md`;
     - [ ] `CHANGELOG.md`.
 
 ## A change to an existing vendor module
@@ -95,7 +99,7 @@ one.
 - [ ] Update the version in `gradle/libs.versions.toml`.
 - [ ] Read the vendor's release notes, and check that start-up, consent and sign-in still behave as
       the vendor page describes.
-- [ ] Update the vendor SDK table on `docs/sdks/android/index.md`.
+- [ ] Update the vendor SDK table on herald-docs' `docs/sdks/android/index.md`.
 - [ ] Add an `Upgrade:` line to `CHANGELOG.md`.
 
 ## A change to `herald-core`
@@ -113,7 +117,8 @@ work for all vendors:
 ## Before you open a pull request
 
 - [ ] `./gradlew build` passes.
-- [ ] `scripts/build_docs.sh` passes, if you changed docs, samples or KDoc.
+- [ ] herald-docs' `scripts/build_docs.sh` passes against your clone, if you changed samples or
+      KDoc.
 - [ ] A public API change has its updated `api` file, and a breaking change is marked `Breaking:`
       in `CHANGELOG.md`.
 - [ ] `CHANGELOG.md` describes anything a user of Herald would notice.

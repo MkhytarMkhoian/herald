@@ -5,4 +5,4 @@ AppsFlyer keeps no user attributes: conversions under AppsFlyer's predefined nam
 through `AppsFlyerPurchaseEvent`, `AppsFlyerSubscribeEvent` and `AppsFlyerAdRevenueEvent`, which
 the app maps its events to. AppsFlyer starts on consent, not on start-up.
 
-See the [AppsFlyer page](https://mkhytarmkhoian.github.io/herald/vendors/appsflyer/).
+See the [AppsFlyer page](https://mkhytarmkhoian.github.io/herald-docs/vendors/appsflyer/).

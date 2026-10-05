@@ -5,4 +5,4 @@ properties become user properties, a `ScreenViewEvent` becomes Amplitude's own
 `[Amplitude] Screen Viewed`, and a purchase the app maps to `AmplitudeRevenueEvent` goes through
 Amplitude's revenue API.
 
-See the [Amplitude page](https://mkhytarmkhoian.github.io/herald/vendors/amplitude/).
+See the [Amplitude page](https://mkhytarmkhoian.github.io/herald-docs/vendors/amplitude/).

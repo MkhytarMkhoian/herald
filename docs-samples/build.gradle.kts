@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
-// The code on the website. Doc pages include marked sections of these files, and `build` compiles
-// them, so an API change that breaks an example breaks the build instead of the docs.
+// The Kotlin code on the website, whose pages live in herald-docs. They include marked sections of
+// these files, and `build` compiles them, so an API change that breaks an example breaks the build
+// instead of the docs.
 //
 // Not published and not an API: examples read like app code, so explicit API mode is off.
 plugins {
