@@ -5,6 +5,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import io.github.mkhytarmkhoian.herald.Property
 import io.github.mkhytarmkhoian.herald.Resolution
 import io.github.mkhytarmkhoian.herald.adjust.AdjustPropertySetter
+import io.github.mkhytarmkhoian.herald.adjust.AdjustToken
 import io.github.mkhytarmkhoian.herald.adjust.AdjustPropertySetterFactory
 import io.github.mkhytarmkhoian.herald.adjust.CompositeAdjustEventTrackerFactory
 import io.github.mkhytarmkhoian.herald.adjust.TokenAdjustEventTrackerFactory
@@ -13,6 +14,7 @@ import io.github.mkhytarmkhoian.herald.firebase.FirebaseEventTrackerFactory
 import io.github.mkhytarmkhoian.herald.firebase.GenericFirebaseEventTrackerFactory
 import io.github.mkhytarmkhoian.herald.firebase.ScreenViewFirebaseEventTrackerFactory
 import samples.concepts.AppTheme
+import samples.concepts.CheckoutCompleted
 
 fun routing(
     firebaseAnalytics: FirebaseAnalytics,
@@ -29,7 +31,7 @@ fun routing(
 
     // Adjust gets only events with a dashboard token.
     val adjustEvents = CompositeAdjustEventTrackerFactory(
-        TokenAdjustEventTrackerFactory(mapOf("checkout_completed" to "abc123"), adjust),
+        TokenAdjustEventTrackerFactory(listOf(AdjustToken<CheckoutCompleted>("abc123")), adjust),
     ) // nothing at the end: other events aren't sent
     // --8<-- [end:two-kinds]
     listOf(firebaseEvents, adjustEvents)

@@ -1,5 +1,15 @@
 # Change Log
 
+## Version 1.3.0
+
+_Unreleased_
+
+ * Breaking: `TokenAdjustEventTrackerFactory` takes a list of `AdjustToken`s, each pairing a token
+   with an event type, instead of a map from event names:
+   `listOf(AdjustToken<SignUpCompleted>("abc123"))`. A renamed event keeps its token, the compiler
+   checks the list, and an event that extends a listed type uses its token too. A type listed twice
+   throws an `IllegalArgumentException`.
+
 ## Version 1.2.0
 
 _2026-10-05_

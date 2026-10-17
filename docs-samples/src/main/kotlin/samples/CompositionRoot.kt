@@ -11,12 +11,9 @@ import com.mixpanel.android.mpmetrics.MixpanelAPI
 import io.github.mkhytarmkhoian.herald.AnalyticsLifecycleService
 import io.github.mkhytarmkhoian.herald.ConsentService
 import io.github.mkhytarmkhoian.herald.Herald
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
 import io.github.mkhytarmkhoian.herald.adjust.AdjustAnalyticsService
 import io.github.mkhytarmkhoian.herald.adjust.AdjustAnalyticsTrackerService
+import io.github.mkhytarmkhoian.herald.adjust.AdjustToken
 import io.github.mkhytarmkhoian.herald.adjust.CompositeAdjustEventTrackerFactory
 import io.github.mkhytarmkhoian.herald.adjust.CompositeAdjustPropertySetterFactory
 import io.github.mkhytarmkhoian.herald.adjust.GenericAdjustPropertySetterFactory
@@ -36,6 +33,10 @@ import io.github.mkhytarmkhoian.herald.mixpanel.MixpanelAnalyticsService
 import io.github.mkhytarmkhoian.herald.mixpanel.MixpanelAnalyticsTrackerService
 import io.github.mkhytarmkhoian.herald.mixpanel.ScreenViewMixpanelEventTrackerFactory
 import io.github.mkhytarmkhoian.herald.mixpanel.UserPropertyMixpanelPropertySetterFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import samples.guides.AnalyticsConsentRepository
 
 // --8<-- [start:firebase-provider]
@@ -83,7 +84,11 @@ fun mixpanelProvider(mixpanel: MixpanelAPI): Herald.Provider {
     )
 }
 
-fun adjustProvider(adjust: AdjustInstance, config: AdjustConfig, tokens: Map<String, String>): Herald.Provider {
+fun adjustProvider(
+    adjust: AdjustInstance,
+    config: AdjustConfig,
+    tokens: List<AdjustToken<*>>,
+): Herald.Provider {
     val tracker = AdjustAnalyticsTrackerService(
         CompositeAdjustEventTrackerFactory(
             TokenAdjustEventTrackerFactory(tokens, adjust), // only events with a dashboard token
@@ -108,7 +113,7 @@ fun buildHerald(
     mixpanel: MixpanelAPI,
     adjust: AdjustInstance,
     adjustConfig: AdjustConfig,
-    adjustTokens: Map<String, String>,
+    adjustTokens: List<AdjustToken<*>>,
 ): Herald {
     // --8<-- [start:herald]
     val herald = Herald {

@@ -8,10 +8,13 @@ import io.github.mkhytarmkhoian.herald.Herald
 import io.github.mkhytarmkhoian.herald.adjust.AdjustAnalyticsService
 import io.github.mkhytarmkhoian.herald.adjust.AdjustAnalyticsTrackerService
 import io.github.mkhytarmkhoian.herald.adjust.AdjustEventTrackerFactory
+import io.github.mkhytarmkhoian.herald.adjust.AdjustToken
 import io.github.mkhytarmkhoian.herald.adjust.CompositeAdjustEventTrackerFactory
 import io.github.mkhytarmkhoian.herald.adjust.CompositeAdjustPropertySetterFactory
 import io.github.mkhytarmkhoian.herald.adjust.GenericAdjustPropertySetterFactory
 import io.github.mkhytarmkhoian.herald.adjust.TokenAdjustEventTrackerFactory
+import samples.concepts.CheckoutCompleted
+import samples.concepts.PlanSelected
 
 fun adjustProvider(
     application: Application,
@@ -29,7 +32,10 @@ fun adjustProvider(
         CompositeAdjustEventTrackerFactory(
             featureFactories + // your revenue and ad-revenue trackers, among others
                 TokenAdjustEventTrackerFactory(
-                    tokens = mapOf("checkout_completed" to "abc123", "sign_up_finished" to "def456"),
+                    tokens = listOf(
+                        AdjustToken<CheckoutCompleted>("abc123"),
+                        AdjustToken<PlanSelected>("def456"),
+                    ),
                     adjust = adjust,
                 ),
         ),
