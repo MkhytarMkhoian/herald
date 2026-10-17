@@ -2,7 +2,7 @@
 
 ## Version 1.3.0
 
-_Unreleased_
+_2026-10-17_
 
  * Breaking: `TokenAdjustEventTrackerFactory` takes a list of `AdjustToken`s, each pairing a token
    with an event type, instead of a map from event names:
