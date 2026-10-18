@@ -2,7 +2,7 @@
 
 ## Version 1.4.0
 
-_Unreleased_
+_2026-10-18_
 
  * New: `herald-meta`, which sends events to Meta's App Events, over Meta's Android SDK 19:
    conversions under Meta's standard names, and purchases through `MetaPurchaseEvent`.

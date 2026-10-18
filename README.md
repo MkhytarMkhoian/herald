@@ -14,7 +14,11 @@ Herald is an analytics library for mobile apps. Your app describes what happened
 Herald sends that event to every analytics service you use: Firebase, Adjust, Mixpanel, AppsFlyer,
 Amplitude, Meta, or one you build yourself.
 
-This repository is the **Android SDK**. The Flutter SDK is in development.
+This repository is the **Android SDK**, in Kotlin. The same design is also available for
+[iOS](https://github.com/MkhytarMkhoian/herald-ios),
+[Flutter](https://github.com/MkhytarMkhoian/herald-flutter),
+[React Native](https://github.com/MkhytarMkhoian/herald-react-native) and
+[Kotlin Multiplatform](https://github.com/MkhytarMkhoian/herald-kmp).
 
 - **Your features don't know which vendors you use.** A feature tracks its own event, like
   `CheckoutStarted`, and never calls a vendor SDK directly. You can add, replace or remove a vendor
@@ -34,9 +38,9 @@ This repository is the **Android SDK**. The Flutter SDK is in development.
 
 ```kotlin
 dependencies {
-    implementation("io.github.mkhytarmkhoian:herald-core:1.3.0")
-    implementation("io.github.mkhytarmkhoian:herald-firebase:1.3.0") // one per vendor you use
-    testImplementation("io.github.mkhytarmkhoian:herald-testing:1.3.0")
+    implementation("io.github.mkhytarmkhoian:herald-core:1.4.0")
+    implementation("io.github.mkhytarmkhoian:herald-firebase:1.4.0") // one per vendor you use
+    testImplementation("io.github.mkhytarmkhoian:herald-testing:1.4.0")
 }
 ```
 
