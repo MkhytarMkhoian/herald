@@ -3,8 +3,6 @@
   <img alt="Herald" src="docs/assets/readme-banner-light.png">
 </picture>
 
-> *A herald announces an event to whoever is listening.*
-
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mkhytarmkhoian/herald-core)](https://central.sonatype.com/namespace/io.github.mkhytarmkhoian)
 [![CI](https://github.com/MkhytarMkhoian/herald/actions/workflows/ci.yml/badge.svg)](https://github.com/MkhytarMkhoian/herald/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
