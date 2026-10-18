@@ -49,6 +49,7 @@ val unvalidatedByDesign = setOf(
     "herald-appsflyer",
     "herald-firebase",
     "herald-mixpanel",
+    "herald-meta",
     "herald-compose",
 )
 

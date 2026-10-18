@@ -14,6 +14,7 @@ firebaseBom = "34.19.0"
 adjust = "5.8.0"
 mixpanel = "8.11.0"
 appsflyer = "7.0.1"
+facebook = "19.0.0"
 amplitude = "1.33.0"
 
 # docs-samples only: the DI examples on the website compile against these.
@@ -42,6 +43,7 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 adjust-android = { module = "com.adjust.sdk:adjust-android", version.ref = "adjust" }
 mixpanel-android = { module = "com.mixpanel.android:mixpanel-android", version.ref = "mixpanel" }
 appsflyer-android = { module = "com.appsflyer:af-android-sdk", version.ref = "appsflyer" }
+facebook-core = { module = "com.facebook.android:facebook-core", version.ref = "facebook" }
 amplitude-android = { module = "com.amplitude:analytics-android", version.ref = "amplitude" }
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }

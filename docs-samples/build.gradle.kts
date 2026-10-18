@@ -25,6 +25,7 @@ dependencies {
     implementation(project(":herald-adjust"))
     implementation(project(":herald-mixpanel"))
     implementation(project(":herald-appsflyer"))
+    implementation(project(":herald-meta"))
     implementation(project(":herald-amplitude"))
     implementation(project(":herald-compose"))
     implementation(project(":herald-testing"))

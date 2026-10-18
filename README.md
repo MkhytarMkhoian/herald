@@ -12,7 +12,7 @@
 
 Herald is an analytics library for mobile apps. Your app describes what happened as an event, and
 Herald sends that event to every analytics service you use: Firebase, Adjust, Mixpanel, AppsFlyer,
-Amplitude, or one you build yourself.
+Amplitude, Meta, or one you build yourself.
 
 This repository is the **Android SDK**. The Flutter SDK is in development.
 
@@ -88,6 +88,7 @@ val herald = Herald {
 | `herald-adjust` | Sends to Adjust: events by dashboard token, purchases and ad revenue. |
 | `herald-mixpanel` | Sends to Mixpanel: events, user profile and super properties. |
 | `herald-appsflyer` | Sends to AppsFlyer: conversions, purchases, subscriptions and ad revenue. |
+| `herald-meta` | Sends to Meta: conversions and purchases, for Meta's ads. |
 | `herald-amplitude` | Sends to Amplitude: events, user properties, screen views and revenue. |
 | `herald-log` | Prints every call to Logcat, for debug builds. |
 | `herald-compose` | Helpers to track screen views, clicks and impressions from Compose. |
