@@ -3,7 +3,9 @@ package samples.vendors
 import android.app.Application
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import io.github.mkhytarmkhoian.herald.ConsentService
 import io.github.mkhytarmkhoian.herald.Event
+import io.github.mkhytarmkhoian.herald.EventTrackerService
 import io.github.mkhytarmkhoian.herald.Herald
 import io.github.mkhytarmkhoian.herald.Resolution
 import io.github.mkhytarmkhoian.herald.meta.CompositeMetaEventTrackerFactory
@@ -40,6 +42,47 @@ fun metaProvider(
     // --8<-- [end:provider]
     return provider
 }
+
+fun gatedMetaProvider(
+    logger: AppEventsLogger,
+    featureFactories: List<MetaEventTrackerFactory>,
+): Herald.Provider {
+    val tracker = MetaAnalyticsTrackerService(CompositeMetaEventTrackerFactory(featureFactories))
+    val service = MetaAnalyticsService(logger)
+    // --8<-- [start:gate]
+    val gate = ConsentGate(events = tracker, consent = service)
+
+    val provider = Herald.Provider(
+        name = "meta",
+        events = gate,  // dropped while consent is off
+        identity = service,
+        lifecycle = service,
+        consent = gate, // keeps the answer, then turns Meta's own switch
+    )
+    // --8<-- [end:gate]
+    return provider
+}
+
+// --8<-- [start:gate-class]
+// Meta's own switch doesn't stop the events your app logs, so this drops them while consent is off.
+class ConsentGate(
+    private val events: EventTrackerService,
+    private val consent: ConsentService,
+) : EventTrackerService, ConsentService {
+
+    @Volatile
+    private var enabled = false
+
+    override suspend fun track(event: Event) {
+        if (enabled) events.track(event)
+    }
+
+    override suspend fun setEnabled(enabled: Boolean) {
+        this.enabled = enabled
+        consent.setEnabled(enabled)
+    }
+}
+// --8<-- [end:gate-class]
 
 // --8<-- [start:conversions]
 class CheckoutMetaEventTrackerFactory(
