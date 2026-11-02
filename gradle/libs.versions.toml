@@ -10,7 +10,7 @@ coroutines = "1.11.0"
 compose = "1.12.1"
 lifecycle = "2.11.0"
 
-firebaseBom = "34.19.0"
+firebaseBom = "35.1.0"
 adjust = "5.8.1"
 mixpanel = "8.12.0"
 appsflyer = "7.0.4"

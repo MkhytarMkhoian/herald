@@ -4,6 +4,10 @@
 
 _Unreleased_
 
+ * Breaking: Herald needs Android 7 (API 24) or later, up from Android 6 (API 23), because
+   Firebase Analytics 24 does. Every module moves together, so all of Herald has one minimum.
+ * Upgrade: Firebase BOM 35.1.0, with Firebase Analytics 24.0.0. `herald-firebase` passes the BOM
+   on to your app, so your other Firebase libraries move to the 35.1.0 versions too.
  * Upgrade: Adjust's Android SDK 5.8.1, Mixpanel's 8.12.0, AppsFlyer's 7.0.4 and Amplitude's
    1.36.0.
 
