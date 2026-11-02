@@ -1,15 +1,15 @@
 # Change Log
 
-## Unreleased
+## Version 1.5.0
 
-_Unreleased_
+_2026-11-02_
 
+ * Breaking: Herald needs Android 7 (API 24) or later, up from Android 6 (API 23), because
+   Firebase Analytics 24 does. Every module moves together, so all of Herald has one minimum.
  * Fix: `MetaAnalyticsService.setEnabled` also turns off what Meta's SDK 19 collects by itself: the
    screen title and app link URL it adds to events, and its product improvement data. For a fresh
    install to collect nothing before consent, also set `com.facebook.sdk.AutoLogMetaDataEnabled`
    and `com.facebook.sdk.AutoLogProductImprovementEnabled` to `false` in `AndroidManifest.xml`.
- * Breaking: Herald needs Android 7 (API 24) or later, up from Android 6 (API 23), because
-   Firebase Analytics 24 does. Every module moves together, so all of Herald has one minimum.
  * Upgrade: Firebase BOM 35.1.0, with Firebase Analytics 24.0.0. `herald-firebase` passes the BOM
    on to your app, so your other Firebase libraries move to the 35.1.0 versions too.
  * Upgrade: Adjust's Android SDK 5.8.1, Mixpanel's 8.12.0, AppsFlyer's 7.0.4 and Amplitude's

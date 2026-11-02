@@ -36,9 +36,9 @@ This repository is the **Android SDK**, in Kotlin. The same design is also avail
 
 ```kotlin
 dependencies {
-    implementation("io.github.mkhytarmkhoian:herald-core:1.4.0")
-    implementation("io.github.mkhytarmkhoian:herald-firebase:1.4.0") // one per vendor you use
-    testImplementation("io.github.mkhytarmkhoian:herald-testing:1.4.0")
+    implementation("io.github.mkhytarmkhoian:herald-core:1.5.0")
+    implementation("io.github.mkhytarmkhoian:herald-firebase:1.5.0") // one per vendor you use
+    testImplementation("io.github.mkhytarmkhoian:herald-testing:1.5.0")
 }
 ```
 
