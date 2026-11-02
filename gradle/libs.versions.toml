@@ -1,7 +1,7 @@
 # Single source of truth for versions, shared with the `build-logic` convention plugins.
 [versions]
-agp = "9.4.0"
-kotlin = "2.4.20"
+agp = "9.5.0"
+kotlin = "2.4.21"
 binary-compatibility-validator = "0.18.2"
 maven-publish = "0.37.0"
 dokka = "2.2.0"
@@ -11,11 +11,11 @@ compose = "1.12.1"
 lifecycle = "2.11.0"
 
 firebaseBom = "34.19.0"
-adjust = "5.8.0"
-mixpanel = "8.11.0"
-appsflyer = "7.0.1"
+adjust = "5.8.1"
+mixpanel = "8.12.0"
+appsflyer = "7.0.4"
 facebook = "19.0.0"
-amplitude = "1.33.0"
+amplitude = "1.36.0"
 
 # docs-samples only: the DI examples on the website compile against these.
 koin = "4.2.2"
@@ -23,7 +23,7 @@ hilt = "2.60.1"
 
 junit = "4.13.2"
 mockk = "1.14.11"
-robolectric = "4.16"
+robolectric = "4.17"
 
 [libraries]
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }

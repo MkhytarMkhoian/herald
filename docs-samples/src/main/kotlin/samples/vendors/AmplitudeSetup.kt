@@ -2,6 +2,7 @@ package samples.vendors
 
 import android.content.Context
 import com.amplitude.android.Amplitude
+import com.amplitude.android.AutocaptureOption
 import com.amplitude.android.Configuration
 import io.github.mkhytarmkhoian.herald.Herald
 import io.github.mkhytarmkhoian.herald.amplitude.AmplitudeAnalyticsService
@@ -19,9 +20,16 @@ fun amplitudeProvider(
     featureFactories: List<AmplitudeEventTrackerFactory>,
 ): Herald.Provider {
     // --8<-- [start:provider]
-    // optOut = true: silent until consent. Autocapture stays at its default (sessions only), so
-    // screen views come from Herald's factory and are not counted twice.
-    val amplitude = Amplitude(Configuration(apiKey, context, optOut = true))
+    // optOut = true: silent until consent. Autocapture is sessions only, so screen views come
+    // from Herald's factory and are not counted twice.
+    val amplitude = Amplitude(
+        Configuration(
+            apiKey,
+            context,
+            optOut = true,
+            autocapture = setOf(AutocaptureOption.SESSIONS),
+        ),
+    )
 
     val tracker = AmplitudeAnalyticsTrackerService(
         CompositeAmplitudeEventTrackerFactory(

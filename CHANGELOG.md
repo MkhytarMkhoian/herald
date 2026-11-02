@@ -1,5 +1,12 @@
 # Change Log
 
+## Unreleased
+
+_Unreleased_
+
+ * Upgrade: Adjust's Android SDK 5.8.1, Mixpanel's 8.12.0, AppsFlyer's 7.0.4 and Amplitude's
+   1.36.0.
+
 ## Version 1.4.0
 
 _2026-10-18_
