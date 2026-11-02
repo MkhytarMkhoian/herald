@@ -27,6 +27,8 @@ internal class MetaAnalyticsServiceTest {
         mockkObject(AppEventsLogger.Companion)
         every { FacebookSdk.setAutoLogAppEventsEnabled(any()) } just runs
         every { FacebookSdk.setAdvertiserIDCollectionEnabled(any()) } just runs
+        every { FacebookSdk.setAutoLogMetaDataEnabled(any()) } just runs
+        every { FacebookSdk.setAutoLogProductImprovementEnabled(any()) } just runs
         every { FacebookSdk.setAutoInitEnabled(any()) } just runs
         every { FacebookSdk.fullyInitialize() } just runs
         every { AppEventsLogger.setUserID(any()) } just runs
@@ -45,6 +47,8 @@ internal class MetaAnalyticsServiceTest {
         verify {
             FacebookSdk.setAutoLogAppEventsEnabled(true)
             FacebookSdk.setAdvertiserIDCollectionEnabled(true)
+            FacebookSdk.setAutoLogMetaDataEnabled(true)
+            FacebookSdk.setAutoLogProductImprovementEnabled(true)
             FacebookSdk.setAutoInitEnabled(true)
             FacebookSdk.fullyInitialize()
         }
@@ -58,6 +62,8 @@ internal class MetaAnalyticsServiceTest {
         verify {
             FacebookSdk.setAutoLogAppEventsEnabled(false)
             FacebookSdk.setAdvertiserIDCollectionEnabled(false)
+            FacebookSdk.setAutoLogMetaDataEnabled(false)
+            FacebookSdk.setAutoLogProductImprovementEnabled(false)
             FacebookSdk.setAutoInitEnabled(false)
         }
         verify(exactly = 1) { FacebookSdk.fullyInitialize() }

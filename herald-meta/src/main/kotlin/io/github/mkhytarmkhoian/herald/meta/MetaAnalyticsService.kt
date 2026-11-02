@@ -11,7 +11,8 @@ import io.github.mkhytarmkhoian.herald.Identity
  * Meta's start, sign-in and consent, over an [AppEventsLogger] the app creates.
  *
  * [setEnabled] turns Meta's own collection on or off: the events it logs by itself, such as
- * installs, and the advertiser id. It doesn't stop the events your app logs.
+ * installs, the advertiser id, the screen title and app link URL it adds to events, and its
+ * product improvement data. It doesn't stop the events your app logs.
  *
  * Meta's SDK starts before any Herald code runs, so a fresh install collects nothing by itself only
  * if `AndroidManifest.xml` turns its automatic collection off:
@@ -20,6 +21,8 @@ import io.github.mkhytarmkhoian.herald.Identity
  * <meta-data android:name="com.facebook.sdk.AutoInitEnabled" android:value="false" />
  * <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled" android:value="false" />
  * <meta-data android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled" android:value="false" />
+ * <meta-data android:name="com.facebook.sdk.AutoLogMetaDataEnabled" android:value="false" />
+ * <meta-data android:name="com.facebook.sdk.AutoLogProductImprovementEnabled" android:value="false" />
  * ```
  *
  * [setEnabled] then turns them on or off. Call it with the stored answer on every launch.
@@ -38,6 +41,8 @@ public class MetaAnalyticsService(
     override suspend fun setEnabled(enabled: Boolean) {
         FacebookSdk.setAutoLogAppEventsEnabled(enabled)
         FacebookSdk.setAdvertiserIDCollectionEnabled(enabled)
+        FacebookSdk.setAutoLogMetaDataEnabled(enabled)
+        FacebookSdk.setAutoLogProductImprovementEnabled(enabled)
         FacebookSdk.setAutoInitEnabled(enabled)
         if (enabled) FacebookSdk.fullyInitialize()
     }
